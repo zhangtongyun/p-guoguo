@@ -6,7 +6,7 @@ package common;
  * @author
  *
  */
-public class StateCodeConstant {
+public class Constants {
 	
 	/**
 	 * 成功

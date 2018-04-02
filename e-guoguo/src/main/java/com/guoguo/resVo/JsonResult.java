@@ -1,6 +1,6 @@
 package com.guoguo.resVo;
 
-import common.StateCodeConstant;
+import common.Constants;
 
 import java.io.Serializable;
 
@@ -12,7 +12,7 @@ public class JsonResult<T> implements Serializable {
 
     private boolean isOk;
 
-    private String resCode = StateCodeConstant.SUCCESS_CODE;
+    private String resCode = Constants.SUCCESS_CODE;
 
     private String resDescription;
 
