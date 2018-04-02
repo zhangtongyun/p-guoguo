@@ -19,8 +19,8 @@ public class UserServiceTest {
 
     @Test
     public void sss(){
-        User user = userService.getUser(0);
-        System.out.println(user.getName());
+//        User user = userService.getUser(0);
+//        System.out.println(user.getName());
     }
 
 }

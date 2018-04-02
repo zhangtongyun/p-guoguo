@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>果果</title>
+    <script src="/js/jquery-1.10.2.min.js"></script>
+    <link href="/css/webuploader.css" rel="stylesheet" />
+    <link href="/css/style.css" rel="stylesheet" />
+
+    <script src="/js/webuploader.js"></script>
+
+
+</head>
+<body>
+
+<div id="uploader-demo">
+    <!--用来存放item-->
+    <div id="fileList" class="uploader-list"></div>
+    <div id="filePicker">选择图片</div>
+    <button id="ctlBtn" class="btn btn-default">开始上传</button>
+</div>
+
+</body>
+<script>
+    // 初始化Web Uploader
+    var uploader = WebUploader.create({
+
+        // 选完文件后，是否自动上传。
+        auto: false,
+
+        // swf文件路径
+        swf:'/js/Uploader.swf',
+
+        // 文件接收服务端。
+        server: '/uploadFile/uploadImg',
+
+        // 选择文件的按钮。可选。
+        // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+        pick: '#filePicker',
+
+        // 只允许选择图片文件。
+        accept: {
+            title: 'Images',
+            extensions: 'jpg,jpeg,png',
+            mimeTypes: 'image/jpg,image/jpeg,image/png'
+        }
+    });
+    // 当有文件添加进来的时候
+    uploader.on( 'fileQueued', function( file ) {
+        var $li = $(
+                '<div id="' + file.id + '" class="file-item thumbnail">' +
+                '<img>' +
+                '<div class="info">' + file.name + '</div>' +
+                '</div>'
+        ),$img = $li.find('img');
+
+        $("#fileList").append( $li );
+        $('<div class="del"></div>').appendTo( $li ).text('删除').click(function(){
+            alert(11);
+            uploader.removeFile(file,true);
+            $("#"+file.id).remove();
+        });
+
+        // 创建缩略图
+        // 如果为非图片文件，可以不用调用此方法。
+        // thumbnailWidth x thumbnailHeight 为 100 x 100
+        uploader.makeThumb( file, function( error, src ) {
+            if ( error ) {
+                    $img.replaceWith('<span>不能预览</span>');
+                return;
+            }
+
+                $img.attr( 'src', src);
+        }, 100, 100 );
+    });
+
+    // 文件上传成功，给item添加成功class, 用样式标记上传成功。
+    uploader.on( 'uploadSuccess', function( file ,response) {
+        var $li = $( '#'+file.id ),
+            $success = $li.find('div .success');
+
+        // 避免重复创建
+        if ( !$success.length ) {
+            $success = $('<div class="success"></div>').appendTo( $li );
+        }
+
+            $success.text('上传成功');
+    });
+
+    // 文件上传失败，显示上传出错。
+    uploader.on( 'uploadError', function( file ) {
+        var $li = $( '#'+file.id ),
+            $error = $li.find('div .error');
+
+        // 避免重复创建
+        if ( !$error.length ) {
+            $error = $('<div class="error"></div>').appendTo( $li );
+        }
+
+            $error.text('上传失败');
+    });
+    $("#ctlBtn").on( 'click', function() {
+        uploader.upload();
+    });
+</script>
+</html>

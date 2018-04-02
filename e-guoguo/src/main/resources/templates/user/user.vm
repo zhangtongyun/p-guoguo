@@ -1,0 +1,369 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>果果</title>
+    <script src="/js/jquery-1.10.2.min.js"></script>
+
+    <script src="/js/bootstrap.min.js"></script>
+    <link href="/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/css/bootstrap-select.min.css" rel="stylesheet" />
+    <link href="/css/toastr.min.css" rel="stylesheet" />
+    <link href="/css/webuploader.css" rel="stylesheet" />
+
+    <script src="/js/bootstrap-select.min.js"></script>
+    <script src="/js/bootstrap-table.js"></script>
+    <link href="/css/bootstrap-table.css" rel="stylesheet" />
+    <script src="/js/bootstrap-table-zh-CN.js"></script>
+    <script src="/js/toastr.min.js"></script>
+    <script src="/js/common.js"></script>
+
+    <script src="/js/webuploader.js"></script>
+    <script src="/js/sha256.js" type="text/javascript"></script>
+
+
+</head>
+<body>
+<div class="panel-body" style="padding-bottom:0px;">
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <input type="hidden" id = "id"/>
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">新增</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="userName">登录名</label>
+                        <input type="text" name="userName" class="form-control" id="userName" placeholder="登录名称">
+                    </div>
+                    <div class="form-group">
+                        <label for="showName">显示名称</label>
+                        <input type="text" name="showName" class="form-control" id="showName" placeholder="显示名称">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">密码</label>
+                        <input type="password" name="password" class="form-control" id="password" placeholder="密码">
+                    </div>
+                    <div class="form-group">
+                        <label for="status">状态</label>
+                        <select id="status" class="selectpicker form-control" data-live-search="true">
+                            <option value="1">有效</option>
+                            <option value="0">无效</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
+                    <button type="button" id="btn_submit" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">查询条件</div>
+        <div class="panel-body">
+            <form id="formSearch" class="form-horizontal">
+                <div class="form-group">
+                    <label class="control-label col-sm-1" style="margin: 4px 0px">姓名</label>
+                    <div class="col-sm-2" style="margin: 4px 0px">
+                        <input type="text" class="form-control" id="name">
+                    </div>
+                    <label class="control-label col-sm-1" style="margin: 4px 0px">状态</label>
+                    <div class="col-sm-2" style="margin: 4px 0px">
+                        <select id="statusQ" class="selectpicker form-control" data-live-search="true">
+                            <option value="1">有效</option>
+                            <option value="0">无效</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2" style="text-align:left;margin: 4px 0px">
+                        <button type="button" style="margin-left:50px" id="btn_query" class="btn btn-primary">查询</button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="toolbar" class="btn-group">
+        <button id="btn_add" type="button" class="btn btn-default">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+        </button>
+        <button id="btn_edit" type="button" class="btn btn-default">
+            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改
+        </button>
+        <button id="btn_delete" type="button" class="btn btn-default">
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+        </button>
+    </div>
+    <div class="table-responsive">
+        <table id="tableList" class="table text-nowrap"></table>
+    </div>
+
+</div>
+</body>
+<script>
+    $(function () {
+
+        //1.初始化Table
+        var oTable = new TableInit();
+        oTable.Init();
+
+        //2.初始化Button的点击事件
+        var oButtonInit = new ButtonInit();
+        oButtonInit.Init();
+
+    });
+
+
+    var TableInit = function () {
+        var oTableInit = new Object();
+        //初始化Table
+        var ht = $(window).height()-40 - $(".panel-default").height();
+        oTableInit.Init = function () {
+            $('#tableList').bootstrapTable({
+                url: '/user/getList',         //请求后台的URL（*）
+                method: 'post',                      //请求方式（*）
+                toolbar: '#toolbar',                //工具按钮用哪个容器
+                striped: true,                      //是否显示行间隔色
+                cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+                pagination: true,                   //是否显示分页（*）
+                queryParamsType:"",
+                queryParams: oTableInit.queryParams,//传递参数（*）
+                sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
+                pageNumber:1,                       //初始化加载第一页，默认第一页
+                pageSize: 10,                       //每页的记可供选择的每页的行数录行数（*）
+                pageList: [10, 25, 50, 100],        //（*）
+                strictSearch: true,
+                showColumns: true,                  //是否显示所有的列
+                showRefresh: true,                  //是否显示刷新按钮
+                minimumCountColumns: 2,             //最少允许的列数
+                clickToSelect: true,                //是否启用点击选中行
+                height: ht,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+                uniqueId: "ID",                     //每一行的唯一标识，一般为主键列
+                showToggle:true,                    //是否显示详细视图和列表视图的切换按钮
+                cardView: false,                    //是否显示详细视图
+                detailView: false,                   //是否显示父子表
+                columns: [{
+                    checkbox: true
+                }, {
+                    field: 'userName',
+                    title: '登录名称',
+                    sortable:true
+                }, {
+                    field: 'showName',
+                    title: '显示名称',
+                    sortable:true
+                }, {
+                    field: 'state',
+                    title: '状态',
+                    sortable:true,
+                    formatter: operateFormatter
+                } ],
+                onLoadSuccess: function (data) {
+                    $('[rel="popover"]').popover({placement:'top'});
+                },
+                onLoadError: function (status) {
+                    return false;
+                }
+            });
+        };
+
+        function operateFormatter(value, row, index) {//赋予的参数
+            if(row['state'] == '0'){
+                return [
+                        '无效'
+                ].join('');
+            }else{
+                return [
+                    '有效'
+                ].join('');
+            }
+
+        }
+        //得到查询的参数
+        oTableInit.queryParams = function (params) {
+            var temp = {  //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+                limit: params.pageSize,   //页面大小
+                page:params.pageNumber,//页码
+                name: $("#name").val(),
+                statusQ:$("#statusQ").val(),
+                sortOrder: params.sortOrder,//排序
+                sortName:params.sortName//排序字段
+            };
+            return temp;
+        };
+        return oTableInit;
+    };
+
+
+    var ButtonInit = function () {
+        var oInit = new Object();
+        var postdata = {};
+
+        oInit.Init = function () {
+            //初始化页面上面的按钮事件
+            $("#btn_query").click(function(){
+                $('#tableList').bootstrapTable('refreshOptions',{pageNumber:1});
+            });
+
+            //注册新增按钮的事件
+            $("#btn_add").click(function () {
+                $("#myModalLabel").text("新增");
+                $("#userName").val("");
+                $("#id").val("");
+                $("#showName").val("");
+                $("#state").val("");
+                $("#myModalLabel").text("新建");
+                $("#btn_submit").unbind();
+                //新增
+                $("#btn_submit").click(function(){
+                    addUser();
+                });
+                $('#myModal').modal();
+
+            });
+
+
+
+            $("#btn_delete").click(function(){
+                del();
+            });
+
+            //注册修改按钮的事件
+            $("#btn_edit").click(function () {
+                var arrselections = $("#tableList").bootstrapTable('getSelections');
+                if (arrselections.length <= 0) {
+                    toastr.warning('请选择有效数据');
+                    return;
+                }
+                if (arrselections.length > 1) {
+                    toastr.warning('只能选择一条数据');
+                    return;
+                }
+                $("#id").val(arrselections[0].id);
+                $("#userName").val(arrselections[0].userName);
+                $("#showName").val(arrselections[0].showName);
+                $("#status").selectpicker('val',arrselections[0].state);
+                $('#password').val("");
+                $("#myModalLabel").text("修改");
+                $('#myModal').modal();
+                $("#btn_submit").unbind();
+                $("#btn_submit").click(function(){
+                    editUser();
+                });
+            });
+        };
+
+        return oInit;
+    };
+
+
+    //注册删除按钮的事件
+    function del () {
+        //取表格的选中行数据
+        var arrselections = $("#tableList").bootstrapTable('getSelections');
+        if (arrselections.length <= 0) {
+            toastr.warning('请选择有效数据');
+            return;
+        }
+        Ewin.confirm({ message: "确认要删除选择的数据吗？" }).on(function (e) {
+            if (!e) {
+                return;
+            }
+            $.ajax({
+                type: "post",
+                url: "/user/delUser",
+                data:JSON.stringify(arrselections),
+                contentType: 'application/json',
+                dataType:'json',
+                success: function (data) {
+                    toastr.success('删除数据成功');
+                    $('#tableList').bootstrapTable('refreshOptions',{pageNumber:1});
+                },
+                error: function () {
+                    toastr.error('删除失败');
+                },
+                complete: function () {
+
+                }
+
+            });
+        });
+    };
+
+    function addUser(){
+        if(!$('#password').val()){
+            toastr.error('密码不能为空');
+            return false;
+        }
+        var passwordInput = $('#password');
+        passwordInput.val(sha256_digest(passwordInput.val()));
+        var prams = {
+            userName:$("#userName").val(),
+            showName:$("#showName").val(),
+            password:passwordInput.val(),
+            status:$("#status").val()
+        };
+
+        $.ajax({
+            type:'post',
+            url:'/user/createUser',
+            data:JSON.stringify(prams),
+            contentType: 'application/json',
+            dataType:'json',
+            success:function(data){
+                if(data.ok){
+                    toastr.success('添加成功');
+                    $('#tableList').bootstrapTable('refreshOptions',{pageNumber:1});
+                }else{
+                    toastr.error(data.resDescription);
+                }
+
+            },
+            error: function () {
+                toastr.error('添加失败');
+            }
+        });
+    }
+
+    function editUser(){
+        var passwordInput = $('#password');
+        if($('#password').val()){
+            passwordInput.val(sha256_digest(passwordInput.val()));
+        }
+
+        var prams = {
+            id:$("#id").val(),
+            userName:$("#userName").val(),
+            showName:$("#showName").val(),
+            password:passwordInput.val(),
+            status:$("#status").val()
+        };
+        $.ajax({
+            type:'post',
+            url:'/user/editUser',
+            data:JSON.stringify(prams),
+            contentType: 'application/json',
+            dataType:'json',
+            success:function(data){
+                if(data.ok){
+                    toastr.success('修改成功');
+                    $('#tableList').bootstrapTable('refreshOptions',{pageNumber:1});
+                }else{
+                    toastr.error(data.resDescription);
+                }
+
+            },
+            error: function () {
+                toastr.error('修改失败');
+            }
+        });
+    }
+</script>
+</html>
