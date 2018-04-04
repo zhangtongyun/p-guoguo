@@ -6,9 +6,9 @@ import com.guoguo.bean.UserExample;
 import com.guoguo.mapper.UserMapper;
 import com.guoguo.reqsVo.UserCreateVo;
 import com.guoguo.reqsVo.UserVo;
-import com.guoguo.resVo.JsonResult;
-import com.guoguo.resVo.JsonResultPage;
-import com.guoguo.resVo.UserResp;
+import com.guoguo.respVo.JsonResult;
+import com.guoguo.respVo.JsonResultPage;
+import com.guoguo.respVo.UserResp;
 import com.guoguo.service.UserService;
 import com.guoguo.util.UtilClass;
 import org.apache.commons.collections.CollectionUtils;
@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService {
         if(StringUtils.isNotBlank(vo.getName()))
             criteria.andUserNameEqualTo(vo.getName());
         if(StringUtils.isNotBlank(vo.getSortName()))
-            example.setOrderByClause(UtilClass.getColumn(vo.getSortName()) + " " +vo.getSortOrder());
+            example.setOrderByClause(vo.getSortName() + " " +vo.getSortOrder());
         List<User> list = userMapper.selectByExample(example);
         List<UserResp> resps = new ArrayList<>();
         for(User user:list){

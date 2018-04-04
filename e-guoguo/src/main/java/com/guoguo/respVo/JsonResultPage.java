@@ -1,4 +1,4 @@
-package com.guoguo.resVo;
+package com.guoguo.respVo;
 
 import java.io.Serializable;
 
@@ -15,7 +15,17 @@ public class JsonResultPage<T> extends JsonResult<T> implements Serializable {
 
     private Integer offset = 1;
     private Integer limit = 10;
+    private Integer page;
 
+    public JsonResultPage(){
+
+    }
+
+    public JsonResultPage(Integer page,Integer limit,Integer total){
+        this.page = page;
+        this.total = total;
+        this.limit = limit;
+    }
     public Integer getTotal() {
         return total;
     }
@@ -38,5 +48,13 @@ public class JsonResultPage<T> extends JsonResult<T> implements Serializable {
 
     public void setLimit(Integer limit) {
         this.limit = limit;
+    }
+
+    public Integer getPage() {
+        return page;
+    }
+
+    public void setPage(Integer page) {
+        this.page = page;
     }
 }

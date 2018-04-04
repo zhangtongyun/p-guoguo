@@ -1,14 +1,10 @@
 package com.guoguo.controller;
 
-import com.github.pagehelper.PageHelper;
 import com.guoguo.bean.User;
-import com.guoguo.reqsVo.TestVo;
 import com.guoguo.reqsVo.UserCreateVo;
 import com.guoguo.reqsVo.UserVo;
-import com.guoguo.resVo.JsonResult;
-import com.guoguo.resVo.JsonResultPage;
-import com.guoguo.resVo.Test;
-import com.guoguo.resVo.UserResp;
+import com.guoguo.respVo.JsonResult;
+import com.guoguo.respVo.UserResp;
 import com.guoguo.service.UserService;
 import com.guoguo.util.PermissionSign;
 import com.guoguo.util.RoleSign;
@@ -69,6 +65,8 @@ public class UserController extends BaseController {
             // 验证成功在Session中保存用户信息
             final User authUserInfo = userService.selectByUsername(user.getUserName());
             request.getSession().setAttribute("userInfo", authUserInfo);
+            //设置过期时间
+            subject.getSession().setTimeout(1800000);
         } catch (AuthenticationException e) {
             // 身份验证失败
             model.addAttribute("error", "用户名或密码错误 ！");

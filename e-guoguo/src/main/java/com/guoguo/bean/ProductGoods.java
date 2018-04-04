@@ -13,7 +13,7 @@ public class ProductGoods implements Serializable {
     /**
      * 
      */
-    private String googsName;
+    private String goodsName;
 
     /**
      * 标语
@@ -168,18 +168,18 @@ public class ProductGoods implements Serializable {
 
     /**
      * 
-     * @return googs_name 
+     * @return goods_name 
      */
-    public String getGoogsName() {
-        return googsName;
+    public String getGoodsName() {
+        return goodsName;
     }
 
     /**
      * 
-     * @param googsName 
+     * @param goodsName 
      */
-    public void setGoogsName(String googsName) {
-        this.googsName = googsName == null ? null : googsName.trim();
+    public void setGoodsName(String goodsName) {
+        this.goodsName = goodsName == null ? null : goodsName.trim();
     }
 
     /**

@@ -75,7 +75,7 @@ public class ProductGoodsExample {
     }
 
     /**
-     * product_goods 2018-04-02
+     * product_goods 2018-04-03
      */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
@@ -178,73 +178,73 @@ public class ProductGoodsExample {
             return (Criteria) this;
         }
 
-        public Criteria andGoogsNameIsNull() {
-            addCriterion("googs_name is null");
+        public Criteria andGoodsNameIsNull() {
+            addCriterion("goods_name is null");
             return (Criteria) this;
         }
 
-        public Criteria andGoogsNameIsNotNull() {
-            addCriterion("googs_name is not null");
+        public Criteria andGoodsNameIsNotNull() {
+            addCriterion("goods_name is not null");
             return (Criteria) this;
         }
 
-        public Criteria andGoogsNameEqualTo(String value) {
-            addCriterion("googs_name =", value, "googsName");
+        public Criteria andGoodsNameEqualTo(String value) {
+            addCriterion("goods_name =", value, "goodsName");
             return (Criteria) this;
         }
 
-        public Criteria andGoogsNameNotEqualTo(String value) {
-            addCriterion("googs_name <>", value, "googsName");
+        public Criteria andGoodsNameNotEqualTo(String value) {
+            addCriterion("goods_name <>", value, "goodsName");
             return (Criteria) this;
         }
 
-        public Criteria andGoogsNameGreaterThan(String value) {
-            addCriterion("googs_name >", value, "googsName");
+        public Criteria andGoodsNameGreaterThan(String value) {
+            addCriterion("goods_name >", value, "goodsName");
             return (Criteria) this;
         }
 
-        public Criteria andGoogsNameGreaterThanOrEqualTo(String value) {
-            addCriterion("googs_name >=", value, "googsName");
+        public Criteria andGoodsNameGreaterThanOrEqualTo(String value) {
+            addCriterion("goods_name >=", value, "goodsName");
             return (Criteria) this;
         }
 
-        public Criteria andGoogsNameLessThan(String value) {
-            addCriterion("googs_name <", value, "googsName");
+        public Criteria andGoodsNameLessThan(String value) {
+            addCriterion("goods_name <", value, "goodsName");
             return (Criteria) this;
         }
 
-        public Criteria andGoogsNameLessThanOrEqualTo(String value) {
-            addCriterion("googs_name <=", value, "googsName");
+        public Criteria andGoodsNameLessThanOrEqualTo(String value) {
+            addCriterion("goods_name <=", value, "goodsName");
             return (Criteria) this;
         }
 
-        public Criteria andGoogsNameLike(String value) {
-            addCriterion("googs_name like", value, "googsName");
+        public Criteria andGoodsNameLike(String value) {
+            addCriterion("goods_name like", value, "goodsName");
             return (Criteria) this;
         }
 
-        public Criteria andGoogsNameNotLike(String value) {
-            addCriterion("googs_name not like", value, "googsName");
+        public Criteria andGoodsNameNotLike(String value) {
+            addCriterion("goods_name not like", value, "goodsName");
             return (Criteria) this;
         }
 
-        public Criteria andGoogsNameIn(List<String> values) {
-            addCriterion("googs_name in", values, "googsName");
+        public Criteria andGoodsNameIn(List<String> values) {
+            addCriterion("goods_name in", values, "goodsName");
             return (Criteria) this;
         }
 
-        public Criteria andGoogsNameNotIn(List<String> values) {
-            addCriterion("googs_name not in", values, "googsName");
+        public Criteria andGoodsNameNotIn(List<String> values) {
+            addCriterion("goods_name not in", values, "goodsName");
             return (Criteria) this;
         }
 
-        public Criteria andGoogsNameBetween(String value1, String value2) {
-            addCriterion("googs_name between", value1, value2, "googsName");
+        public Criteria andGoodsNameBetween(String value1, String value2) {
+            addCriterion("goods_name between", value1, value2, "goodsName");
             return (Criteria) this;
         }
 
-        public Criteria andGoogsNameNotBetween(String value1, String value2) {
-            addCriterion("googs_name not between", value1, value2, "googsName");
+        public Criteria andGoodsNameNotBetween(String value1, String value2) {
+            addCriterion("goods_name not between", value1, value2, "goodsName");
             return (Criteria) this;
         }
 
@@ -2010,7 +2010,7 @@ public class ProductGoodsExample {
     }
 
     /**
-     * product_goods 2018-04-02
+     * product_goods 2018-04-03
      */
     public static class Criterion {
         private String condition;

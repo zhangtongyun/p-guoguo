@@ -1,8 +1,8 @@
 package com.guoguo.controller;
 
 import com.guoguo.reqsVo.TestVo;
-import com.guoguo.resVo.JsonResultPage;
-import com.guoguo.resVo.Test;
+import com.guoguo.respVo.JsonResultPage;
+import com.guoguo.respVo.Test;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

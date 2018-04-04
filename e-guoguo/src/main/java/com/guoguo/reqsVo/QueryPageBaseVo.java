@@ -1,5 +1,8 @@
 package com.guoguo.reqsVo;
 
+import com.guoguo.util.UtilClass;
+import org.apache.commons.lang.StringUtils;
+
 import java.io.Serializable;
 
 
@@ -47,6 +50,7 @@ public class QueryPageBaseVo implements Serializable {
     }
 
     public void setSortName(String sortName) {
-        this.sortName = sortName;
+        if(StringUtils.isNotBlank(sortName))
+            this.sortName = UtilClass.getColumn(sortName);
     }
 }

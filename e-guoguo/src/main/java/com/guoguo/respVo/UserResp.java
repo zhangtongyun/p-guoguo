@@ -1,9 +1,11 @@
-package com.guoguo.resVo;
+package com.guoguo.respVo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class UserResp {
+public class UserResp implements Serializable {
 
+    private static final long serialVersionUID = -1288011673918629688L;
     private Integer id;
 
     private String userName;

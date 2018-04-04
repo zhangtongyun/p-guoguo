@@ -1,4 +1,4 @@
-package com.guoguo.resVo;
+package com.guoguo.respVo;
 
 import java.io.Serializable;
 

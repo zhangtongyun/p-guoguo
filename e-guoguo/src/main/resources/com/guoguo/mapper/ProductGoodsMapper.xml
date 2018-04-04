@@ -3,7 +3,7 @@
 <mapper namespace="com.guoguo.mapper.ProductGoodsMapper">
   <resultMap id="BaseResultMap" type="com.guoguo.bean.ProductGoods">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="googs_name" jdbcType="VARCHAR" property="googsName" />
+    <result column="goods_name" jdbcType="VARCHAR" property="goodsName" />
     <result column="second_name" jdbcType="VARCHAR" property="secondName" />
     <result column="goods_model" jdbcType="VARCHAR" property="goodsModel" />
     <result column="color" jdbcType="VARCHAR" property="color" />
@@ -61,7 +61,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, googs_name, second_name, goods_model, color, standard, standard_unit, charge_unit, 
+    id, goods_name, second_name, goods_model, color, standard, standard_unit, charge_unit, 
     material_1, material_2, material_3, market_price, lv_info, category_id, category_name, 
     country_id, country_name, province_id, province_name, city_id, city_name, sale_status, 
     bar_code, is_del, create_date, create_operator, update_date, update_operator
@@ -92,7 +92,7 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.guoguo.bean.ProductGoods" useGeneratedKeys="true">
-    insert into product_goods (googs_name, second_name, goods_model, 
+    insert into product_goods (goods_name, second_name, goods_model, 
       color, standard, standard_unit, 
       charge_unit, material_1, material_2, 
       material_3, market_price, lv_info, 
@@ -102,7 +102,7 @@
       bar_code, is_del, create_date, 
       create_operator, update_date, update_operator
       )
-    values (#{googsName,jdbcType=VARCHAR}, #{secondName,jdbcType=VARCHAR}, #{goodsModel,jdbcType=VARCHAR}, 
+    values (#{goodsName,jdbcType=VARCHAR}, #{secondName,jdbcType=VARCHAR}, #{goodsModel,jdbcType=VARCHAR}, 
       #{color,jdbcType=VARCHAR}, #{standard,jdbcType=VARCHAR}, #{standardUnit,jdbcType=VARCHAR}, 
       #{chargeUnit,jdbcType=VARCHAR}, #{material1,jdbcType=VARCHAR}, #{material2,jdbcType=VARCHAR}, 
       #{material3,jdbcType=VARCHAR}, #{marketPrice,jdbcType=DECIMAL}, #{lvInfo,jdbcType=TINYINT}, 
@@ -116,8 +116,8 @@
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.guoguo.bean.ProductGoods" useGeneratedKeys="true">
     insert into product_goods
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="googsName != null">
-        googs_name,
+      <if test="goodsName != null">
+        goods_name,
       </if>
       <if test="secondName != null">
         second_name,
@@ -199,8 +199,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="googsName != null">
-        #{googsName,jdbcType=VARCHAR},
+      <if test="goodsName != null">
+        #{goodsName,jdbcType=VARCHAR},
       </if>
       <if test="secondName != null">
         #{secondName,jdbcType=VARCHAR},
@@ -291,8 +291,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.guoguo.bean.ProductGoods">
     update product_goods
     <set>
-      <if test="googsName != null">
-        googs_name = #{googsName,jdbcType=VARCHAR},
+      <if test="goodsName != null">
+        goods_name = #{goodsName,jdbcType=VARCHAR},
       </if>
       <if test="secondName != null">
         second_name = #{secondName,jdbcType=VARCHAR},
@@ -377,7 +377,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.guoguo.bean.ProductGoods">
     update product_goods
-    set googs_name = #{googsName,jdbcType=VARCHAR},
+    set goods_name = #{goodsName,jdbcType=VARCHAR},
       second_name = #{secondName,jdbcType=VARCHAR},
       goods_model = #{goodsModel,jdbcType=VARCHAR},
       color = #{color,jdbcType=VARCHAR},

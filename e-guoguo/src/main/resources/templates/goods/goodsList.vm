@@ -1,0 +1,646 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>果果</title>
+    <script src="/js/jquery-1.10.2.min.js"></script>
+
+    <script src="/js/bootstrap.min.js"></script>
+    <link href="/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/css/bootstrap-select.min.css" rel="stylesheet" />
+    <link href="/css/toastr.min.css" rel="stylesheet" />
+    <link href="/css/webuploader.css" rel="stylesheet" />
+
+    <script src="/js/bootstrap-select.min.js"></script>
+    <script src="/js/bootstrap-table.js"></script>
+    <link href="/css/bootstrap-table.css" rel="stylesheet" />
+    <script src="/js/bootstrap-table-zh-CN.js"></script>
+    <script src="/js/toastr.min.js"></script>
+    <script src="/js/common.js"></script>
+
+    <script src="/js/webuploader.js"></script>
+    <script src="/js/sha256.js" type="text/javascript"></script>
+
+
+</head>
+<body>
+<div class="panel-body" style="padding-bottom:0px;">
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document" style="width: 60%">
+            <div class="modal-content">
+                <input type="hidden" id = "id"/>
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">新增</h4>
+                </div>
+                <div class="modal-body">
+
+                    <form class="form-horizontal" role="form" id="addForm">
+                        <div class="form-group">
+                            <label for="goodsName" class="col-sm-2 control-label">商品名称</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="goodsName" class="form-control" id="goodsName" placeholder="商品名称">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="secondName" class="col-sm-2 control-label">标语</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="secondName" class="form-control" id="secondName" placeholder="标语">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="goodsModel" class="col-sm-2 control-label">商品型号</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="goodsModel" class="form-control" id="goodsModel" placeholder="商品型号">
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="color" class="col-sm-2 control-label">颜色</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="color" class="form-control" id="color" placeholder="颜色">
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="standard" class="col-sm-2 control-label">规格</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="standard" class="form-control" id="standard" placeholder="规格">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="standardUnit" class="col-sm-2 control-label">规格单位</label>
+                            <div class="col-sm-10">
+                                <select id="standardUnit" class="selectpicker form-control" data-live-search="true">
+                                    #systemCode("standard_unit")
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="chargeUnit" class="col-sm-2 control-label">计价单位</label>
+                            <div class="col-sm-10">
+                                <select id="chargeUnit" class="selectpicker form-control" data-live-search="true">
+                                    #systemCode("unit")
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="material1" class="col-sm-2 control-label">基材</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="material1" class="form-control" id="material1" placeholder="基材">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="material2" class="col-sm-2 control-label">辅材</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="material2" class="form-control" id="material2" placeholder="辅材">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="material3" class="col-sm-2 control-label">饰面</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="material3" class="form-control" id="material3" placeholder="饰面">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="marketPrice" class="col-sm-2 control-label">市场参考价</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="marketPrice" class="form-control" id="marketPrice" placeholder="市场参考价">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="lvInfo" class="col-sm-2 control-label">等级</label>
+                            <div class="col-sm-10">
+                                <select id="lvInfo" class="selectpicker form-control" data-live-search="true">
+                                    #systemCode("product_lv")
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="categoryId" class="col-sm-2 control-label">分类</label>
+                            <div class="col-sm-10">
+                                <select id="categoryId" class="selectpicker form-control" data-live-search="true">
+                                    #foreach($category in $categoryList)
+                                     <option value="$category.categoryId">$category.categoryName</option>
+                                    #end
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="countryId" class="col-sm-2 control-label">产地</label>
+                            <div class="col-sm-10">
+                                <select id="countryId" onchange="getProvince(this.value)" class="selectpicker " data-live-search="true">
+
+                                </select>
+                                <select id="provinceId" onchange="getCity(this.value)" class="selectpicker" data-live-search="true">
+
+                                </select>
+                                <select id="cityId" class="selectpicker" data-live-search="true">
+
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="saleStatus" class="col-sm-2 control-label">状态</label>
+                            <div class="col-sm-10">
+                                <select id="saleStatus" class="selectpicker form-control" data-live-search="true">
+                                    <option value="1">上架</option>
+                                    <option value="0">下架</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </form>
+                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
+                    <button type="button" id="btn_submit" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">查询条件</div>
+        <div class="panel-body">
+            <form id="formSearch" class="form-horizontal">
+                <div class="form-group">
+                    <label class="control-label col-sm-1" style="margin: 4px 0px">商品名称</label>
+                    <div class="col-sm-2" style="margin: 4px 0px">
+                        <input type="text" class="form-control" id="goodsNameQ">
+                    </div>
+                    <label class="control-label col-sm-1" style="margin: 4px 0px">状态</label>
+                    <div class="col-sm-2" style="margin: 4px 0px">
+                        <select id="saleStatusQ" class="selectpicker form-control" data-live-search="true">
+                            <option value="">全部</option>
+                            <option value="1">上架</option>
+                            <option value="0">下架</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2" style="text-align:left;margin: 4px 0px">
+                        <button type="button" style="margin-left:50px" id="btn_query" class="btn btn-primary">查询</button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="toolbar" class="btn-group">
+        <button id="btn_add" type="button" class="btn btn-default">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+        </button>
+        <button id="btn_edit" type="button" class="btn btn-default">
+            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改
+        </button>
+        <button id="btn_delete" type="button" class="btn btn-default">
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+        </button>
+    </div>
+    <div class="table-responsive">
+        <table id="tableList" class="table text-nowrap"></table>
+    </div>
+
+</div>
+</body>
+<script>
+    $(function () {
+
+        //1.初始化Table
+        var oTable = new TableInit();
+        oTable.Init();
+
+        //2.初始化Button的点击事件
+        var oButtonInit = new ButtonInit();
+        oButtonInit.Init();
+
+        //获取国家
+        getNation();
+        //获取省份
+        getProvince('CN',null);
+
+    });
+
+
+    var TableInit = function () {
+        var oTableInit = new Object();
+        //初始化Table
+        var ht = $(window).height()-40 - $(".panel-default").height();
+        oTableInit.Init = function () {
+            $('#tableList').bootstrapTable({
+                url: '/productGoods/getList',         //请求后台的URL（*）
+                method: 'post',                      //请求方式（*）
+                toolbar: '#toolbar',                //工具按钮用哪个容器
+                striped: true,                      //是否显示行间隔色
+                cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+                pagination: true,                   //是否显示分页（*）
+                queryParamsType:"",
+                queryParams: oTableInit.queryParams,//传递参数（*）
+                sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
+                pageNumber:1,                       //初始化加载第一页，默认第一页
+                pageSize: 10,                       //每页的记可供选择的每页的行数录行数（*）
+                pageList: [10, 25, 50, 100],        //（*）
+                strictSearch: true,
+                showColumns: true,                  //是否显示所有的列
+                showRefresh: true,                  //是否显示刷新按钮
+                minimumCountColumns: 8,             //最少允许的列数
+                clickToSelect: true,                //是否启用点击选中行
+                height: ht,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+                uniqueId: "ID",                     //每一行的唯一标识，一般为主键列
+                showToggle:true,                    //是否显示详细视图和列表视图的切换按钮
+                cardView: false,                    //是否显示详细视图
+                detailView: false,                   //是否显示父子表
+                columns: [{
+                    checkbox: true
+                }, {
+                    field: 'goodsName',
+                    title: '商品名称',
+                    sortable:true
+                }, {
+                    field: 'secondName',
+                    title: '标语'
+                },{
+                    field: 'goodsModel',
+                    title: '商品型号'
+                },{
+                    field: 'color',
+                    title: '颜色'
+                },{
+                    field: 'standardUnitName',
+                    title: '规格'
+                },{
+                    field: 'chargeUnitName',
+                    title: '计价单位'
+                },{
+                    field: 'material1',
+                    title: '基材',
+                    visible: false
+                },{
+                    field: 'material2',
+                    title: '辅材',
+                    visible: false
+                },{
+                    field: 'material3',
+                    title: '饰面',
+                    visible: false
+                },{
+                    field: 'marketPrice',
+                    title: '市场参考价'
+                },{
+                    field: 'lvInfoName',
+                    title: '等级'
+                },{
+                    field: 'categoryName',
+                    title: '分类'
+                },{
+                    field: 'provinceName',
+                    title: '产地'
+                }, {
+                    field: 'saleStatus',
+                    title: '状态',
+                    formatter: operateFormatter
+                } ],
+                onLoadSuccess: function (data) {
+                    $('[rel="popover"]').popover({placement:'top'});
+                },
+                onLoadError: function (status) {
+                    return false;
+                }
+            });
+        };
+
+        function operateFormatter(value, row, index) {//赋予的参数
+            if(row['saleStatus'] == '0'){
+                return [
+                    '下架'
+                ].join('');
+            }else{
+                return [
+                    '上架'
+                ].join('');
+            }
+
+        }
+        //得到查询的参数
+        oTableInit.queryParams = function (params) {
+            var temp = {  //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+                limit: params.pageSize,   //页面大小
+                page:params.pageNumber,//页码
+                goodsName: $("#goodsNameQ").val(),
+                saleStatus:$("#saleStatusQ").val(),
+                sortOrder: params.sortOrder,//排序
+                sortName:params.sortName//排序字段
+            };
+            return temp;
+        };
+        return oTableInit;
+    };
+
+
+    var ButtonInit = function () {
+        var oInit = new Object();
+        var postdata = {};
+
+        oInit.Init = function () {
+            //初始化页面上面的按钮事件
+            $("#btn_query").click(function(){
+                $('#tableList').bootstrapTable('refreshOptions',{pageNumber:1});
+            });
+
+            //注册新增按钮的事件
+            $("#btn_add").click(function () {
+                $("#myModalLabel").text("新增");
+                $("#btn_submit").unbind();
+                //新增
+                $("#btn_submit").click(function(){
+                    addUser();
+                });
+                $('#myModal').modal();
+
+            });
+
+
+
+            $("#btn_delete").click(function(){
+                del();
+            });
+
+            //注册修改按钮的事件
+            $("#btn_edit").click(function () {
+                var arrselections = $("#tableList").bootstrapTable('getSelections');
+                if (arrselections.length <= 0) {
+                    toastr.warning('请选择有效数据');
+                    return;
+                }
+                if (arrselections.length > 1) {
+                    toastr.warning('只能选择一条数据');
+                    return;
+                }
+                $("#addForm input").val("");
+                $("#id").val(arrselections[0].id);
+                $("#goodsName").val(arrselections[0].goodsName);
+                $("#secondName").val(arrselections[0].secondName);
+                $("#goodsModel").val(arrselections[0].goodsModel);
+                $("#color").val(arrselections[0].color);
+                $("#standard").val(arrselections[0].standard);
+                $('#standardUnit').selectpicker('val',arrselections[0].standardUnit);
+                $('#chargeUnit').selectpicker('val',arrselections[0].chargeUnit);
+                $("#material1").val(arrselections[0].material1);
+                $("#material2").val(arrselections[0].material2);
+                $("#material3").val(arrselections[0].material3);
+                $("#marketPrice").val(arrselections[0].marketPrice);
+
+                getNation();
+                getProvince(arrselections[0].countryId,arrselections[0].provinceId);
+                getCity(arrselections[0].provinceId);
+                $('#categoryId').selectpicker('val',arrselections[0].categoryId);
+                $('#countryId').selectpicker('val',arrselections[0].countryId);
+                $('#provinceId').selectpicker('val',arrselections[0].provinceId);
+                $('#cityId').selectpicker('val',arrselections[0].cityId);
+                $('#saleStatus').selectpicker('val',arrselections[0].saleStatus);
+                $('#lvInfo').selectpicker('val',arrselections[0].lvInfo);
+                $('.selectpicker').selectpicker('refresh');
+
+                $("#myModalLabel").text("修改");
+                $('#myModal').modal();
+                $("#btn_submit").unbind();
+                $("#btn_submit").click(function(){
+                    editUser();
+                    $("#addForm input").val("");
+                });
+            });
+        };
+
+        return oInit;
+    };
+
+
+    //注册删除按钮的事件
+    function del () {
+        //取表格的选中行数据
+        var arrselections = $("#tableList").bootstrapTable('getSelections');
+        if (arrselections.length <= 0) {
+            toastr.warning('请选择有效数据');
+            return;
+        }
+        Ewin.confirm({ message: "确认要删除选择的数据吗？" }).on(function (e) {
+            if (!e) {
+                return;
+            }
+            $.ajax({
+                type: "get",
+                url: "/productGoods/delGoods/"+arrselections.id,
+                data:JSON.stringify(arrselections),
+                contentType: 'application/json',
+                dataType:'json',
+                success: function (data) {
+                    toastr.success('删除数据成功');
+                    $('#tableList').bootstrapTable('refreshOptions',{pageNumber:1});
+                },
+                error: function () {
+                    toastr.error('删除失败');
+                },
+                complete: function () {
+
+                }
+
+            });
+        });
+    };
+
+    function addUser(){
+
+        if(!$("#goodsName").val()){
+            toastr.error("商品名称不能为空");
+            return;
+        }
+        if(!$("#secondName")){
+            toastr.error("标语不能为空");
+            return;
+        }
+        var tt = /(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/;
+        if($("#marketPrice").val() && !tt.test($("#marketPrice").val())){
+            toastr.error("市场价格格式不正确");
+            return;
+        }
+        var prams = {
+            id:$("#id").val(),
+            goodsName:$("#goodsName").val(),
+            secondName:$("#secondName").val(),
+            goodsModel:$("#goodsModel").val(),
+            color:$("#color").val(),
+            standard:$("#standard").val(),
+            standardUnit:$("#standardUnit").val(),
+            chargeUnit:$("#chargeUnit").val(),
+            material1:$("#material1").val(),
+            material2:$("#material2").val(),
+            material3:$("#material3").val(),
+            marketPrice:$("#marketPrice").val(),
+            lvInfo:$("#lvInfo").val(),
+            categoryId:$("#categoryId").val(),
+            countryId:$("#countryId").val(),
+            provinceId:$("#provinceId").val(),
+            cityId:$("#cityId").val(),
+            saleStatus:$("#saleStatus").val()
+        };
+
+        $.ajax({
+            type:'post',
+            url:'/productGoods/addGoods',
+            data:JSON.stringify(prams),
+            contentType: 'application/json',
+            dataType:'json',
+            success:function(data){
+                if(data.ok){
+                    toastr.success('添加成功');
+                    $('#tableList').bootstrapTable('refreshOptions',{pageNumber:1});
+                    $("#addForm input").val("");
+
+                }else{
+                    toastr.error(data.resDescription);
+                }
+
+            },
+            error: function () {
+                toastr.error('添加失败');
+            }
+        });
+    }
+
+    function editUser(){
+        if(!$("#goodsName").val()){
+            toastr.error("商品名称不能为空");
+            return;
+        }
+        if(!$("#secondName")){
+            toastr.error("标语不能为空");
+            return;
+        }
+        var tt = /(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/;
+        if($("#marketPrice").val() && !tt.test($("#marketPrice").val())){
+            toastr.error("市场价格格式不正确");
+            return;
+        }
+        var prams = {
+            goodsName:$("#goodsName").val(),
+            secondName:$("#secondName").val(),
+            goodsModel:$("#goodsModel").val(),
+            color:$("#color").val(),
+            standard:$("#standard").val(),
+            standardUnit:$("#standardUnit").val(),
+            chargeUnit:$("#chargeUnit").val(),
+            material1:$("#material1").val(),
+            material2:$("#material2").val(),
+            material3:$("#material3").val(),
+            marketPrice:$("#marketPrice").val(),
+            lvInfo:$("#lvInfo").val(),
+            categoryId:$("#categoryId").val(),
+            countryId:$("#countryId").val(),
+            provinceId:$("#provinceId").val(),
+            cityId:$("#cityId").val(),
+            saleStatus:$("#saleStatus").val()
+        };
+        $.ajax({
+            type:'post',
+            url:'/productGoods/updateGoods',
+            data:JSON.stringify(prams),
+            contentType: 'application/json',
+            dataType:'json',
+            success:function(data){
+                if(data.ok){
+                    toastr.success('修改成功');
+                    $('#tableList').bootstrapTable('refreshOptions',{pageNumber:1});
+                }else{
+                    toastr.error(data.resDescription);
+                }
+
+            },
+            error: function () {
+                toastr.error('修改失败');
+            }
+        });
+    }
+
+    function getNation(){
+        $.ajax({
+            url:"/common/getNation",
+            type:"get",
+            dataType:"json",
+            async:false,
+            success:function(data){
+                if(data){
+                    var innerTm = '';
+                    for(var i = 0; i < data.rows.length; i++){
+                        if(data.rows[i].nationCode == 'CN')
+                            innerTm += '<option selected value="'+data.rows[i].nationCode+'">'+data.rows[i].nationName+'</option>';
+                        else
+                            innerTm += '<option value="'+data.rows[i].nationCode+'">'+data.rows[i].nationName+'</option>';
+                    }
+                    $("#countryId").html(innerTm);
+                    $("#countryId" ).selectpicker('refresh');
+                }
+            },
+            error:function(){
+                toastr.error("国家获取失败");
+            }
+        })
+    }
+
+    function getProvince(code,k){
+        $.ajax({
+            url:"/common/getProvince/"+code,
+            type:"get",
+            dataType:"json",
+            async:false,
+            success:function(data){
+                if(data){
+                    var innerTm = '';
+                    for(var i = 0; i < data.rows.length; i++){
+                        if(data.rows[i].adressCode == '110000' && !k)
+                            innerTm += '<option selected value="'+data.rows[i].adressCode+'">'+data.rows[i].adress+'</option>';
+                        else
+                            innerTm += '<option value="'+data.rows[i].adressCode+'">'+data.rows[i].adress+'</option>';
+                    }
+                    $("#provinceId").html(innerTm);
+                    $("#provinceId" ).selectpicker('refresh');
+                    if(!k)
+                        getCity("110000");
+                }
+            },
+            error:function(){
+                toastr.error("省份获取失败");
+            }
+        })
+    }
+
+    function getCity(code){
+        $.ajax({
+            url:"/common/getCity/"+code,
+            type:"get",
+            dataType:"json",
+            async:false,
+            success:function(data){
+                if(data){
+                    var innerTm = '';
+                    for(var i = 0; i < data.rows.length; i++){
+                        if(data.rows[i].adressCode == '110100')
+                            innerTm += '<option selected value="'+data.rows[i].adressCode+'">'+data.rows[i].adress+'</option>';
+                        else
+                            innerTm += '<option value="'+data.rows[i].adressCode+'">'+data.rows[i].adress+'</option>';
+                    }
+                    $("#cityId").html(innerTm);
+                    $("#cityId" ).selectpicker('refresh');
+                }
+            },
+            error:function(){
+                toastr.error("城市获取失败");
+            }
+        })
+    }
+
+
+</script>
+</html>

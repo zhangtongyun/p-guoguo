@@ -1,4 +1,4 @@
-package common;
+package com.guoguo.common;
 
 
 /**
@@ -56,5 +56,48 @@ public class Constants {
 	/** 服务调用超时错误 */
 	public static final String API_SERVER_ERROR_TIMEOUT = "502";
 
+	public static class SYSTEM_CODE{
+
+		/**
+		 * 等级
+		 */
+		public static final String PRODUCT_LV = "product_lv";
+
+		/**
+		 * 计价单位
+		 */
+		public static final String UNIT = "unit";
+
+		/**
+		 * 规格单位
+		 */
+		public static final String STANDARD_UNIT = "standard_unit";
+
+	}
+
+	public static class IS_DEL{
+
+		/**
+		 * 删除
+		 */
+		public static final Byte YES = 1;
+
+		/**
+		 * 未删除
+		 */
+		public static final Byte NO = 0;
+	}
+
+	public static class USE_STATE{
+		/**
+		 * 有效
+		 */
+		public static final Integer VALID = 1;
+
+		/**
+		 * 无效
+		 */
+		public static final Integer INVALID = 0;
+	}
 
 }

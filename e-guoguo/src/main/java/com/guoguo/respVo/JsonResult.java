@@ -1,6 +1,6 @@
-package com.guoguo.resVo;
+package com.guoguo.respVo;
 
-import common.Constants;
+import com.guoguo.common.Constants;
 
 import java.io.Serializable;
 
@@ -18,6 +18,31 @@ public class JsonResult<T> implements Serializable {
 
     private T rows;
 
+    public JsonResult(){
+
+    }
+
+    public JsonResult(boolean isOk,T rows){
+        this.isOk = isOk;
+        this.rows = rows;
+    }
+
+    public JsonResult(boolean isOk,T rows,String resCode,String resDescription){
+        this.isOk = isOk;
+        this.rows = rows;
+        this.resCode = resCode;
+        this.resDescription = resDescription;
+    }
+
+    public static <T> JsonResult<T> newSuccess(T rows,String resDescription){
+
+        return new JsonResult<>(true,rows,Constants.SUCCESS_CODE,resDescription);
+    }
+
+    public static <T> JsonResult<T> newError(String resCode,String resDescription){
+
+        return new JsonResult<T>(false,null,resCode,resDescription);
+    }
     public boolean isOk() {
         return isOk;
     }

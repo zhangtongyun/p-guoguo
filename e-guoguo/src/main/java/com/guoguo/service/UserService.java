@@ -3,9 +3,9 @@ package com.guoguo.service;
 import com.guoguo.bean.User;
 import com.guoguo.reqsVo.UserCreateVo;
 import com.guoguo.reqsVo.UserVo;
-import com.guoguo.resVo.JsonResult;
-import com.guoguo.resVo.JsonResultPage;
-import com.guoguo.resVo.UserResp;
+import com.guoguo.respVo.JsonResult;
+import com.guoguo.respVo.JsonResultPage;
+import com.guoguo.respVo.UserResp;
 
 import java.util.List;
 
