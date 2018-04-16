@@ -1,0 +1,495 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>果果</title>
+    <script src="/js/jquery-1.10.2.min.js"></script>
+
+    <script src="/js/bootstrap.min.js"></script>
+    <link href="/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/css/toastr.min.css" rel="stylesheet" />
+    <link href="/css/webuploader.css" rel="stylesheet" />
+    <link href="/css/style.css" rel="stylesheet" />
+    <script src="/js/toastr.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/webuploader.js"></script>
+
+</head>
+<body style="padding: 20px">
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document" style="width: 60%">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">添加图库</h4>
+                </div>
+                <div class="modal-body">
+
+                    <form class="form-horizontal" role="form" id="addForm">
+                        <div class="form-group">
+                            <label for="albumName" class="col-sm-2 control-label">相册名称</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="albumName" class="form-control" id="albumName" placeholder="相册名称">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="albumDesc" class="col-sm-2 control-label">描述</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="albumDesc" class="form-control" id="albumDesc" placeholder="描述">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="sort" class="col-sm-2 control-label">排序</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="sort" class="form-control" onkeyup="value=value.replace(/[^\d]/g,'')" id="sort" placeholder="排序">
+                            </div>
+
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
+                    <button type="button" id="addBtn1" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document" style="width: 80%">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">相册图片</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row" id = "albumPic">
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document" style="width: 80%">
+            <input type="hidden" id = "albumId"/>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">上传图片</h4>
+                </div>
+                <div class="modal-body" >
+                    <div id="fileList" class="uploader-list"></div>
+                    <div id="filePicker">选择图片</div>
+                    <button id="ctlBtn" class="btn btn-default">开始上传</button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <input type="hidden" value="${goodsId}" id="goodsId"/>
+        <div class="row" style="padding: 20px">
+            <button class="btn btn-info" id="addBtn" type="button">添加图库</button>
+        </div>
+        <div class="row">
+            #foreach($album in $list)
+            <div class="col-xs-2">
+                <div class="thumbnail">
+                    <img src="$!{album.picUrl}" onclick="rewiewPic('$!{album.id}')" class="img-rounded" style="cursor: pointer;height: 150px;width: 100%">
+                    <div class="caption" >
+                        <h3>$!{album.albumName}</h3>
+                        <p>$!{album.albumDesc}</p>
+                        <p align="center">
+                            <input type="hidden" id="id" value="$!{album.id}"/>
+                            <input type="hidden" id="albumNameA" value="$!{album.albumName}"/>
+                            <input type="hidden" id="albumDescA" value="$!{album.albumDesc}"/>
+                            <input type="hidden" id="sortA" value="$!{album.sort}"/>
+                            <a href="javascript:void(0)" class="btn btn-info" role="button" onclick="uploadImg($!{album.id})">上传</a>
+                            <a href="javascript:void(0)" class="btn btn-primary editBtn" role="button">编辑
+                                <input type="hidden" id="id" value="$!{album.id}"/>
+                                <input type="hidden" id="albumNameA" value="$!{album.albumName}"/>
+                                <input type="hidden" id="albumDescA" value="$!{album.albumDesc}"/>
+                                <input type="hidden" id="sortA" value="$!{album.sort}"/>
+                            </a>
+                            <a href="javascript:void(0)" class="btn btn-warning" role="button" onclick="deleteBtn($!{album.id},'$!{album.albumName}')">删除</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            #end
+        </div>
+    </div>
+</body>
+<script>
+    $(function () {
+
+
+        //2.初始化Button的点击事件
+        var oButtonInit = new ButtonInit();
+        oButtonInit.Init();
+
+        // 初始化Web Uploader
+        var uploader = WebUploader.create({
+
+            // 选完文件后，是否自动上传。
+            auto: false,
+
+            // swf文件路径
+            swf:'/js/Uploader.swf',
+
+            // 文件接收服务端。
+            server: '/uploadFile/uploadImg',
+
+            // 选择文件的按钮。可选。
+            // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+            pick: '#filePicker',
+
+            // 只允许选择图片文件。
+            accept: {
+                title: 'Images',
+                extensions: 'jpg,jpeg,png',
+                mimeTypes: 'image/jpg,image/jpeg,image/png'
+            }
+        });
+        // 当有文件添加进来的时候
+        uploader.on( 'fileQueued', function( file ) {
+            var $li = $(
+                    '<div id="' + file.id + '" class="file-item thumbnail">' +
+                    '<img>' +
+                    '<div class="info">' + file.name + '</div>' +
+                    '</div>'
+            ),$img = $li.find('img');
+
+            $("#fileList").append( $li );
+            $('<div class="del"></div>').appendTo( $li ).text('删除').click(function(){
+                uploader.removeFile(file,true);
+                $("#"+file.id).remove();
+            });
+
+            // 创建缩略图
+            // 如果为非图片文件，可以不用调用此方法。
+            // thumbnailWidth x thumbnailHeight 为 100 x 100
+            uploader.makeThumb( file, function( error, src ) {
+                if ( error ) {
+                        $img.replaceWith('<span>不能预览</span>');
+                    return;
+                }
+
+                    $img.attr( 'src', src);
+            }, 100, 100 );
+        });
+
+        // 文件上传成功，给item添加成功class, 用样式标记上传成功。
+        uploader.on( 'uploadSuccess', function( file ,response) {
+            var $li = $( '#'+file.id );
+                if(response && response.ok){
+                   var $success = $li.find('div .success');
+
+                    // 避免重复创建
+                    if ( !$success.length ) {
+                        $success = $('<div class="success"></div>').appendTo( $li ).click(function(){
+                            uploader.removeFile(file,true);
+                            $("#"+file.id).remove();
+                        });
+                    }
+                        $success.text('上传成功');
+                    addPhoto(response,$success,file,uploader);
+                }else{
+                   var $error = $li.find('div .error');
+
+                    // 避免重复创建
+                    if ( !$error.length ) {
+                        $error = $('<div class="error"></div>').appendTo( $li ).click(function(){
+                            uploader.removeFile(file,true);
+                            $("#"+file.id).remove();
+                        });
+                    }
+
+                        $error.text('上传失败');
+                    file.setStatus('inited');
+                }
+
+        });
+
+        // 文件上传失败，显示上传出错。
+        uploader.on( 'uploadError', function( file ) {
+            var $li = $( '#'+file.id ),
+                $error = $li.find('div .error');
+
+            // 避免重复创建
+            if ( !$error.length ) {
+                $error = $('<div class="error"></div>').appendTo( $li ).click(function(){
+                    uploader.removeFile(file,true);
+                    $("#"+file.id).remove();
+                });
+            }
+
+                $error.text('上传失败');
+            file.setStatus('inited');
+        });
+
+        $("#ctlBtn").on( 'click', function() {
+            uploader.upload();
+        });
+
+    });
+
+    var ButtonInit = function () {
+        var oInit = new Object();
+        var postdata = {};
+
+        oInit.Init = function () {
+
+            $("#addBtn").click(function(){
+                $("#albumName").val('');
+                $("#albumDesc").val('');
+                $("#sort").val('')
+                $("#myModalLabel").text("添加相册");
+                $("#addBtn1").unbind();
+                $("#addBtn1").click(function(){
+                    addAlbum();
+                });
+                $('#addModal').modal();
+
+            });
+
+            $(".editBtn").each(function(){
+                $(this).click(function(){
+                    var id  = $(this).find("#id").val();
+                    $("#albumName").val($(this).find("#albumNameA").val());
+                    $("#albumDesc").val($(this).find("#albumDescA").val());
+                    $("#sort").val($(this).find("#sortA").val());
+                    $("#myModalLabel").text("修改相册");
+                    $('#addModal').modal();
+                    $("#addBtn1").unbind();
+                    $("#addBtn1").click(function(){
+                        editAlbum(id,null);
+                    });
+                });
+
+            });
+
+        };
+
+        return oInit;
+    };
+
+    function addAlbum(){
+
+        var param = {
+            goodsId:$("#goodsId").val(),
+            albumName:$("#albumName").val(),
+            albumDesc:$("#albumDesc").val(),
+            sort:$("#sort").val()
+        };
+
+        $.ajax({
+            type:"post",
+            url:"/photoAlbum/addAlbum",
+            data:JSON.stringify(param),
+            contentType:"application/json",
+            dataType:"json",
+            success:function(data){
+                if(data && data.ok){
+                    toastr.success('添加相册成功');
+                    window.location.reload();
+                }else if(data && !data.ok){
+                    toastr.error(data.resDescription);
+                }
+            },
+            error:function(){
+                toastr.error('添加相册失败');
+            }
+        })
+
+    }
+
+    function editAlbum(id,url){
+        var param = {
+            id:id
+        };
+
+        if(!url){
+            param.goodsId = $("#goodsId").val();
+            param.albumName = $("#albumName").val();
+            param.albumDesc = $("#albumDesc").val();
+            param.sort = $("#sort").val();
+        }else{
+            param.picUrl = url;
+        }
+
+        $.ajax({
+            type:"post",
+            url:"/photoAlbum/updateAlbum",
+            data:JSON.stringify(param),
+            contentType:"application/json",
+            dataType:"json",
+            success:function(data){
+                if(data && data.ok){
+                    toastr.success('修改相册成功');
+                    window.location.reload();
+                }else if(data && !data.ok){
+                    toastr.error(data.resDescription);
+                }
+            },
+            error:function(){
+                toastr.error('修改相册失败');
+            }
+        })
+    }
+
+    function deleteBtn(id,name){
+        Ewin.confirm({ message: "确认要删除相册【"+name+"】吗？" }).on(function (e) {
+            if (!e) {
+                return;
+            }
+            $.ajax({
+                type: "get",
+                url: "/photoAlbum/deleteAlbum/" + id,
+                data: JSON.stringify(''),
+                contentType: "application/json",
+                dataType: "json",
+                success: function (data) {
+                    if (data && data.ok) {
+                        toastr.success('删除相册成功');
+                        window.location.reload();
+                    } else if (data && !data.ok) {
+                        toastr.error(data.resDescription);
+                    }
+                },
+                error: function () {
+                    toastr.error('删除相册失败');
+                }
+            });
+        });
+    }
+
+    function uploadImg(id){
+        $("#albumId").val(id);
+        $('#uploadModal').modal();
+        $('#filePicker div:eq(1)').attr('style','position: absolute; top: 0px; left: 0px; width: 82px; height: 39px; overflow: hidden; bottom: auto; right: auto;');
+    };
+
+    function rewiewPic(id){
+
+        $.ajax({
+            url:"/photoAlbum/getListByAlbumId/"+id,
+            type:"get",
+            contentType:"application/json",
+            dataType:"json",
+
+            success:function(data){
+
+                var ht = "";
+                if(data && data.ok && data.rows){
+                    for(var i = 0; i < data.rows.length;i++){
+                        ht += '<div class="col-xs-3" id = "photo'+data.rows[i].id+'">'+
+                        '<div class="thumbnail">'+
+                        '<img src="'+data.rows[i].picUrl+'" class="img-rounded" style="height: 200px">'+
+                        '<div class="caption" > <input type="hidden" value="'+data.rows[i].id+'" name = "photoId"/>'+
+                        '<input type="text" onBlur="updateSort('+data.rows[i].id+',this)" value="'+data.rows[i].sort+'" style="width: 60px;float: left;margin-left: 10px;margin-right: 10px" class="form-control" onkeyup="value=value.replace(\/[^\\d]\/g,\'\')" placeholder="序号">'+
+                        '<a class="btn btn-default" style="margin-right: 10px" role="button"   onclick="editAlbum('+data.rows[i].albumId+',\''+data.rows[i].picUrl+'\')">设为封面</a>'+
+                        '<a class="btn btn-default" role="button"  onclick="delPhoto('+data.rows[i].id+')">删除</a>'+
+                        '</div>'+
+                        '</div>'+
+                        '</div>';
+                    }
+                }
+
+                $("#albumPic").html(ht);
+                $('#myModal').modal();
+            },
+            error:function(){
+                toastr.error("查询失败");
+            }
+
+        });
+
+
+    }
+
+    function delPhoto(id){
+        Ewin.confirm({ message: "确认要删除图片吗？" }).on(function (e) {
+            if (!e) {
+                return;
+            }
+            $.ajax({
+                type: "get",
+                url: "/photoAlbum/deletePhoto/" + id,
+                data: JSON.stringify(''),
+                contentType: "application/json",
+                dataType: "json",
+                success: function (data) {
+                    if (data && data.ok) {
+                        toastr.success('删除图片成功');
+                       $("#photo"+id).hide();
+                    } else if (data && !data.ok) {
+                        toastr.error(data.resDescription);
+                    }
+                },
+                error: function () {
+                    toastr.error('删除图片失败');
+                }
+            });
+        });
+    }
+
+    function addPhoto(rs,su,file,uploader){
+        var param = {
+            albumId:$("#albumId").val(),
+            picUrl:rs.rows
+        }
+        $.ajax({
+            url:'/photoAlbum/addPhoto',
+            type:'post',
+            data:JSON.stringify(param),
+            contentType:'application/json',
+            datatype:'json',
+            async:false,
+            success:function(data){
+                if(data && data.ok && data.rows){
+                    uploader.removeFile(file,true);
+                    $("#"+file.id).remove();
+                }
+                else{
+                    file.setStatus('inited');
+                    su.text('上传失败');
+                }
+            },
+            error:function(){
+                file.setStatus('inited');
+                su.text('上传失败');
+            }
+        });
+    }
+
+    function updateSort(id,d){
+        $.ajax({
+            type: "get",
+            url: "/photoAlbum/sortPhoto/" + id+"/"+ d.value,
+            data: JSON.stringify(''),
+            contentType: "application/json",
+            dataType: "json",
+            success: function (data) {
+                if (data && data.ok) {
+
+                } else if (data && !data.ok) {
+                    toastr.error(data.resDescription);
+                }
+            },
+            error: function () {
+                toastr.error('图片排序失败');
+            }
+        });
+    }
+</script>
+
+</html>

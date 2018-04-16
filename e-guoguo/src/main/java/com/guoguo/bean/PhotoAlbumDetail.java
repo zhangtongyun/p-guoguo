@@ -32,7 +32,7 @@ public class PhotoAlbumDetail implements Serializable {
     /**
      * 删除状态，0：未删除,1:已删除,2:无效
      */
-    private Integer isDel;
+    private Byte isDel;
 
     /**
      * 创建时间
@@ -143,7 +143,7 @@ public class PhotoAlbumDetail implements Serializable {
      * 删除状态，0：未删除,1:已删除,2:无效
      * @return is_del 删除状态，0：未删除,1:已删除,2:无效
      */
-    public Integer getIsDel() {
+    public Byte getIsDel() {
         return isDel;
     }
 
@@ -151,7 +151,7 @@ public class PhotoAlbumDetail implements Serializable {
      * 删除状态，0：未删除,1:已删除,2:无效
      * @param isDel 删除状态，0：未删除,1:已删除,2:无效
      */
-    public void setIsDel(Integer isDel) {
+    public void setIsDel(Byte isDel) {
         this.isDel = isDel;
     }
 

@@ -176,7 +176,7 @@
                         </li>
                         <li class="">
                             <a href="javascript:;">
-                                <i class="fa fa-gears"></i><span class="title"> 商品管理 </span><span
+                                <i class="fa fa-shopping-cart"></i><span class="title"> 商品管理 </span><span
                                     class="arrow "> </span>
                             </a>
                             <ul class="sub-menu">

@@ -19,7 +19,6 @@ public class ErrorInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
-
         return true;// 只有返回true才会继续向下执行，返回false取消当前请求
     }
 
@@ -33,6 +32,14 @@ public class ErrorInterceptor implements HandlerInterceptor {
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
                            ModelAndView modelAndView) throws Exception {
+        /**
+         * 拦截目录下请求，是否为ajax请求
+         */
+        if (request.getHeader("x-requested-with") != null && request.getHeader("x-requested-with").equalsIgnoreCase("XMLHttpRequest")){
+            return;
+        }
+        if(null == modelAndView || null == response)
+            return;
         if(response.getStatus()==500){
             modelAndView.setViewName("/500");
         }else if(response.getStatus()==404){

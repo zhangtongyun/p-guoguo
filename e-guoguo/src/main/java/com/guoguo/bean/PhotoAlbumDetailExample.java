@@ -74,7 +74,7 @@ public class PhotoAlbumDetailExample {
     }
 
     /**
-     * photo_album_detail 2018-04-02
+     * photo_album_detail 2018-04-12
      */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
@@ -447,52 +447,52 @@ public class PhotoAlbumDetailExample {
             return (Criteria) this;
         }
 
-        public Criteria andIsDelEqualTo(Integer value) {
+        public Criteria andIsDelEqualTo(Byte value) {
             addCriterion("is_del =", value, "isDel");
             return (Criteria) this;
         }
 
-        public Criteria andIsDelNotEqualTo(Integer value) {
+        public Criteria andIsDelNotEqualTo(Byte value) {
             addCriterion("is_del <>", value, "isDel");
             return (Criteria) this;
         }
 
-        public Criteria andIsDelGreaterThan(Integer value) {
+        public Criteria andIsDelGreaterThan(Byte value) {
             addCriterion("is_del >", value, "isDel");
             return (Criteria) this;
         }
 
-        public Criteria andIsDelGreaterThanOrEqualTo(Integer value) {
+        public Criteria andIsDelGreaterThanOrEqualTo(Byte value) {
             addCriterion("is_del >=", value, "isDel");
             return (Criteria) this;
         }
 
-        public Criteria andIsDelLessThan(Integer value) {
+        public Criteria andIsDelLessThan(Byte value) {
             addCriterion("is_del <", value, "isDel");
             return (Criteria) this;
         }
 
-        public Criteria andIsDelLessThanOrEqualTo(Integer value) {
+        public Criteria andIsDelLessThanOrEqualTo(Byte value) {
             addCriterion("is_del <=", value, "isDel");
             return (Criteria) this;
         }
 
-        public Criteria andIsDelIn(List<Integer> values) {
+        public Criteria andIsDelIn(List<Byte> values) {
             addCriterion("is_del in", values, "isDel");
             return (Criteria) this;
         }
 
-        public Criteria andIsDelNotIn(List<Integer> values) {
+        public Criteria andIsDelNotIn(List<Byte> values) {
             addCriterion("is_del not in", values, "isDel");
             return (Criteria) this;
         }
 
-        public Criteria andIsDelBetween(Integer value1, Integer value2) {
+        public Criteria andIsDelBetween(Byte value1, Byte value2) {
             addCriterion("is_del between", value1, value2, "isDel");
             return (Criteria) this;
         }
 
-        public Criteria andIsDelNotBetween(Integer value1, Integer value2) {
+        public Criteria andIsDelNotBetween(Byte value1, Byte value2) {
             addCriterion("is_del not between", value1, value2, "isDel");
             return (Criteria) this;
         }
@@ -769,7 +769,7 @@ public class PhotoAlbumDetailExample {
     }
 
     /**
-     * photo_album_detail 2018-04-02
+     * photo_album_detail 2018-04-12
      */
     public static class Criterion {
         private String condition;

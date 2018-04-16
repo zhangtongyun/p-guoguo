@@ -52,6 +52,7 @@ public class ProductGoodsServiceImpl implements ProductGoodsService {
         if(StringUtils.isNotBlank(vo.getSortName())){
             example.setOrderByClause(vo.getSortName()+" " + vo.getSortOrder());
         }
+        criteria.andIsDelEqualTo(Constants.IS_DEL.NO);
         List<ProductGoods> list = productGoodsMapper.selectByExample(example);
         List<GoodsResp> resps = new ArrayList<>();
         if(CollectionUtils.isNotEmpty(list)){
@@ -91,6 +92,10 @@ public class ProductGoodsServiceImpl implements ProductGoodsService {
     public int updateGoods(GoodsAddVo goods) {
         ProductGoods record = new ProductGoods();
         BeanUtils.copyProperties(goods,record);
+        if(null == record.getProvinceId())
+            record.setProvinceId("");
+        if(null == record.getCityId())
+            record.setCityId("");
         if(null == record.getId())
             return 0;
         setParams(record);

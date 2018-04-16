@@ -58,7 +58,7 @@ public class ProductGoodsController extends BaseController {
         return JsonResult.newSuccess(i,"修改成功");
     }
 
-    @RequestMapping(value = "delGoods/{id}",method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value = "delGoods/{id}",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
     public JsonResult<Integer> delGoods(@PathVariable("id") Integer id){
         GoodsAddVo addVo  = new GoodsAddVo();

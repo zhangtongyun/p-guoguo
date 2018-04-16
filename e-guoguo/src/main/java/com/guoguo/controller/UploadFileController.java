@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
@@ -26,7 +27,10 @@ import java.time.format.DateTimeFormatter;
 public class UploadFileController {
 
     @Value("${upload.url}")
-    private static String BASE_PATH;
+    private String url;
+    @Value("${upload.pan}")
+    private String pan;
+
     private static Logger logger = LoggerFactory.getLogger(UploadFileController.class);
 
     @Autowired
@@ -40,9 +44,10 @@ public class UploadFileController {
         LocalDateTime localTime = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS");
         String name = localTime.format(formatter) + (int)Math.random()*100;
-        String path = BASE_PATH + "/upload/"
+        String path = url
                 + name + file.getOriginalFilename().substring(file.getOriginalFilename().indexOf("."));
-        File ff = new File(path);
+        String picUrl = pan + path;
+        File ff = new File(picUrl);
         try {
             file.transferTo(ff);
         } catch (IOException e) {

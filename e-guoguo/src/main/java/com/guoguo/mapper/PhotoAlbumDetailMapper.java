@@ -2,6 +2,8 @@ package com.guoguo.mapper;
 
 import com.guoguo.bean.PhotoAlbumDetail;
 import com.guoguo.bean.PhotoAlbumDetailExample;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 public interface PhotoAlbumDetailMapper {
@@ -20,4 +22,6 @@ public interface PhotoAlbumDetailMapper {
     int updateByPrimaryKeySelective(PhotoAlbumDetail record);
 
     int updateByPrimaryKey(PhotoAlbumDetail record);
+
+    int deleteByAlbumId(@Param("albumId")Integer albumId);
 }

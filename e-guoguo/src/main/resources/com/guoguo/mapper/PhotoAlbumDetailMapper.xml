@@ -7,7 +7,7 @@
     <result column="photo_title" jdbcType="VARCHAR" property="photoTitle" />
     <result column="pic_url" jdbcType="VARCHAR" property="picUrl" />
     <result column="sort" jdbcType="INTEGER" property="sort" />
-    <result column="is_del" jdbcType="INTEGER" property="isDel" />
+    <result column="is_del" jdbcType="TINYINT" property="isDel" />
     <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
     <result column="create_operator" jdbcType="VARCHAR" property="createOperator" />
     <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
@@ -77,7 +77,7 @@
       create_operator, update_date, update_operator
       )
     values (#{albumId,jdbcType=INTEGER}, #{photoTitle,jdbcType=VARCHAR}, #{picUrl,jdbcType=VARCHAR}, 
-      #{sort,jdbcType=INTEGER}, #{isDel,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{sort,jdbcType=INTEGER}, #{isDel,jdbcType=TINYINT}, #{createDate,jdbcType=TIMESTAMP}, 
       #{createOperator,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{updateOperator,jdbcType=VARCHAR}
       )
   </insert>
@@ -126,7 +126,7 @@
         #{sort,jdbcType=INTEGER},
       </if>
       <if test="isDel != null">
-        #{isDel,jdbcType=INTEGER},
+        #{isDel,jdbcType=TINYINT},
       </if>
       <if test="createDate != null">
         #{createDate,jdbcType=TIMESTAMP},
@@ -164,7 +164,7 @@
         sort = #{sort,jdbcType=INTEGER},
       </if>
       <if test="isDel != null">
-        is_del = #{isDel,jdbcType=INTEGER},
+        is_del = #{isDel,jdbcType=TINYINT},
       </if>
       <if test="createDate != null">
         create_date = #{createDate,jdbcType=TIMESTAMP},
@@ -187,11 +187,17 @@
       photo_title = #{photoTitle,jdbcType=VARCHAR},
       pic_url = #{picUrl,jdbcType=VARCHAR},
       sort = #{sort,jdbcType=INTEGER},
-      is_del = #{isDel,jdbcType=INTEGER},
+      is_del = #{isDel,jdbcType=TINYINT},
       create_date = #{createDate,jdbcType=TIMESTAMP},
       create_operator = #{createOperator,jdbcType=VARCHAR},
       update_date = #{updateDate,jdbcType=TIMESTAMP},
       update_operator = #{updateOperator,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="deleteByAlbumId" parameterType="java.lang.Integer">
+    UPDATE photo_album_detail
+    SET is_del = 1
+    WHERE
+        album_id = #{albumId}
   </update>
 </mapper>

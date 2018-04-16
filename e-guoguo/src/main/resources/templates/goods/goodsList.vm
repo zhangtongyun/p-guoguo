@@ -132,7 +132,7 @@
                         <div class="form-group">
                             <label for="countryId" class="col-sm-2 control-label">产地</label>
                             <div class="col-sm-10">
-                                <select id="countryId" onchange="getProvince(this.value)" class="selectpicker " data-live-search="true">
+                                <select id="countryId" onchange="getProvince(this.value,null)" class="selectpicker " data-live-search="true">
 
                                 </select>
                                 <select id="provinceId" onchange="getCity(this.value)" class="selectpicker" data-live-search="true">
@@ -198,6 +198,9 @@
         </button>
         <button id="btn_delete" type="button" class="btn btn-default">
             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+        </button>
+        <button id="btn_pic" type="button" class="btn btn-default">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>图库管理
         </button>
     </div>
     <div class="table-responsive">
@@ -302,6 +305,10 @@
                     field: 'saleStatus',
                     title: '状态',
                     formatter: operateFormatter
+                }, {
+                    field: 'operate',
+                    title: '操作',
+                    formatter: operateFt
                 } ],
                 onLoadSuccess: function (data) {
                     $('[rel="popover"]').popover({placement:'top'});
@@ -322,6 +329,12 @@
                     '上架'
                 ].join('');
             }
+
+        }
+        function operateFt(value, row, index) {//赋予的参数
+            return [
+                '<button class="btn btn-info" onclick="photoAlbum(\''+row['id']+'\')" type="button">图库管理</button>'
+            ].join('');
 
         }
         //得到查询的参数
@@ -394,8 +407,10 @@
                 $("#marketPrice").val(arrselections[0].marketPrice);
 
                 getNation();
-                getProvince(arrselections[0].countryId,arrselections[0].provinceId);
-                getCity(arrselections[0].provinceId);
+                if(arrselections[0].countryId)
+                    getProvince(arrselections[0].countryId,'1');
+                if(arrselections[0].provinceId)
+                    getCity(arrselections[0].provinceId);
                 $('#categoryId').selectpicker('val',arrselections[0].categoryId);
                 $('#countryId').selectpicker('val',arrselections[0].countryId);
                 $('#provinceId').selectpicker('val',arrselections[0].provinceId);
@@ -432,7 +447,7 @@
             }
             $.ajax({
                 type: "get",
-                url: "/productGoods/delGoods/"+arrselections.id,
+                url: "/productGoods/delGoods/"+arrselections[0].id,
                 data:JSON.stringify(arrselections),
                 contentType: 'application/json',
                 dataType:'json',
@@ -466,8 +481,8 @@
             toastr.error("市场价格格式不正确");
             return;
         }
+        $("#id").val("");
         var prams = {
-            id:$("#id").val(),
             goodsName:$("#goodsName").val(),
             secondName:$("#secondName").val(),
             goodsModel:$("#goodsModel").val(),
@@ -525,6 +540,7 @@
             return;
         }
         var prams = {
+            id:$("#id").val(),
             goodsName:$("#goodsName").val(),
             secondName:$("#secondName").val(),
             goodsModel:$("#goodsModel").val(),
@@ -606,8 +622,10 @@
                     }
                     $("#provinceId").html(innerTm);
                     $("#provinceId" ).selectpicker('refresh');
-                    if(!k)
+                    if(!k && data.rows.length > 0)
                         getCity("110000");
+                    else if(data.rows.length == 0)
+                        getCity("123");
                 }
             },
             error:function(){
@@ -641,6 +659,9 @@
         })
     }
 
+    function photoAlbum(id){
+        window.location.href = "/photoAlbum/grid/"+id;
+    }
 
 </script>
 </html>
