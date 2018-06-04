@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.guoguo.mapper.NationRegionMapper">
+  <resultMap id="BaseResultMap" type="com.guoguo.bean.NationRegion">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="nation_code" jdbcType="VARCHAR" property="nationCode" />
+    <result column="nation_name" jdbcType="VARCHAR" property="nationName" />
+    <result column="area" jdbcType="VARCHAR" property="area" />
+    <result column="adress" jdbcType="VARCHAR" property="adress" />
+    <result column="adress_code" jdbcType="VARCHAR" property="adressCode" />
+    <result column="parent_code" jdbcType="VARCHAR" property="parentCode" />
+    <result column="parent_code2" jdbcType="VARCHAR" property="parentCode2" />
+    <result column="is_del" jdbcType="TINYINT" property="isDel" />
+    <result column="insert_time" jdbcType="TIMESTAMP" property="insertTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="adress_alias" jdbcType="VARCHAR" property="adressAlias" />
+    <result column="adress_short" jdbcType="VARCHAR" property="adressShort" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, nation_code, nation_name, area, adress, adress_code, parent_code, parent_code2, 
+    is_del, insert_time, update_time, adress_alias, adress_short
+  </sql>
+  <select id="selectByExample" parameterType="com.guoguo.bean.NationRegionExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from nation_region
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from nation_region
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from nation_region
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.guoguo.bean.NationRegion" useGeneratedKeys="true">
+    insert into nation_region (nation_code, nation_name, area, 
+      adress, adress_code, parent_code, 
+      parent_code2, is_del, insert_time, 
+      update_time, adress_alias, adress_short
+      )
+    values (#{nationCode,jdbcType=VARCHAR}, #{nationName,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, 
+      #{adress,jdbcType=VARCHAR}, #{adressCode,jdbcType=VARCHAR}, #{parentCode,jdbcType=VARCHAR}, 
+      #{parentCode2,jdbcType=VARCHAR}, #{isDel,jdbcType=TINYINT}, #{insertTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{adressAlias,jdbcType=VARCHAR}, #{adressShort,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.guoguo.bean.NationRegion" useGeneratedKeys="true">
+    insert into nation_region
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="nationCode != null">
+        nation_code,
+      </if>
+      <if test="nationName != null">
+        nation_name,
+      </if>
+      <if test="area != null">
+        area,
+      </if>
+      <if test="adress != null">
+        adress,
+      </if>
+      <if test="adressCode != null">
+        adress_code,
+      </if>
+      <if test="parentCode != null">
+        parent_code,
+      </if>
+      <if test="parentCode2 != null">
+        parent_code2,
+      </if>
+      <if test="isDel != null">
+        is_del,
+      </if>
+      <if test="insertTime != null">
+        insert_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="adressAlias != null">
+        adress_alias,
+      </if>
+      <if test="adressShort != null">
+        adress_short,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="nationCode != null">
+        #{nationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="nationName != null">
+        #{nationName,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="adress != null">
+        #{adress,jdbcType=VARCHAR},
+      </if>
+      <if test="adressCode != null">
+        #{adressCode,jdbcType=VARCHAR},
+      </if>
+      <if test="parentCode != null">
+        #{parentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="parentCode2 != null">
+        #{parentCode2,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null">
+        #{isDel,jdbcType=TINYINT},
+      </if>
+      <if test="insertTime != null">
+        #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adressAlias != null">
+        #{adressAlias,jdbcType=VARCHAR},
+      </if>
+      <if test="adressShort != null">
+        #{adressShort,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.guoguo.bean.NationRegionExample" resultType="java.lang.Long">
+    select count(*) from nation_region
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.guoguo.bean.NationRegion">
+    update nation_region
+    <set>
+      <if test="nationCode != null">
+        nation_code = #{nationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="nationName != null">
+        nation_name = #{nationName,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="adress != null">
+        adress = #{adress,jdbcType=VARCHAR},
+      </if>
+      <if test="adressCode != null">
+        adress_code = #{adressCode,jdbcType=VARCHAR},
+      </if>
+      <if test="parentCode != null">
+        parent_code = #{parentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="parentCode2 != null">
+        parent_code2 = #{parentCode2,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null">
+        is_del = #{isDel,jdbcType=TINYINT},
+      </if>
+      <if test="insertTime != null">
+        insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adressAlias != null">
+        adress_alias = #{adressAlias,jdbcType=VARCHAR},
+      </if>
+      <if test="adressShort != null">
+        adress_short = #{adressShort,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.guoguo.bean.NationRegion">
+    update nation_region
+    set nation_code = #{nationCode,jdbcType=VARCHAR},
+      nation_name = #{nationName,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      adress = #{adress,jdbcType=VARCHAR},
+      adress_code = #{adressCode,jdbcType=VARCHAR},
+      parent_code = #{parentCode,jdbcType=VARCHAR},
+      parent_code2 = #{parentCode2,jdbcType=VARCHAR},
+      is_del = #{isDel,jdbcType=TINYINT},
+      insert_time = #{insertTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      adress_alias = #{adressAlias,jdbcType=VARCHAR},
+      adress_short = #{adressShort,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -22,6 +22,6 @@ public class UserController {
     @ResponseBody
     public String getUser(){
 
-        return userService.getUser(0).getName();
+        return userService.getUser(1).getUserName();
     }
 }

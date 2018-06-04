@@ -3,7 +3,6 @@ package com.guoguo.controller;
 import com.guoguo.respVo.JsonResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -12,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -32,9 +29,6 @@ public class UploadFileController {
     private String pan;
 
     private static Logger logger = LoggerFactory.getLogger(UploadFileController.class);
-
-    @Autowired
-    private HttpServletRequest request;
 
     @RequestMapping(value = "/uploadImg",method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody

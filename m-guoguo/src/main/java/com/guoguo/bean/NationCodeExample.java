@@ -4,23 +4,23 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class UserExample {
+public class NationCodeExample {
     /**
-     * user
+     * nation_code
      */
     protected String orderByClause;
 
     /**
-     * user
+     * nation_code
      */
     protected boolean distinct;
 
     /**
-     * user
+     * nation_code
      */
     protected List<Criteria> oredCriteria;
 
-    public UserExample() {
+    public NationCodeExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -74,7 +74,7 @@ public class UserExample {
     }
 
     /**
-     * user 2018-04-23
+     * nation_code 2018-04-23
      */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
@@ -177,283 +177,283 @@ public class UserExample {
             return (Criteria) this;
         }
 
-        public Criteria andUserNameIsNull() {
-            addCriterion("user_name is null");
+        public Criteria andNationCodeIsNull() {
+            addCriterion("nation_code is null");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameIsNotNull() {
-            addCriterion("user_name is not null");
+        public Criteria andNationCodeIsNotNull() {
+            addCriterion("nation_code is not null");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameEqualTo(String value) {
-            addCriterion("user_name =", value, "userName");
+        public Criteria andNationCodeEqualTo(String value) {
+            addCriterion("nation_code =", value, "nationCode");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameNotEqualTo(String value) {
-            addCriterion("user_name <>", value, "userName");
+        public Criteria andNationCodeNotEqualTo(String value) {
+            addCriterion("nation_code <>", value, "nationCode");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameGreaterThan(String value) {
-            addCriterion("user_name >", value, "userName");
+        public Criteria andNationCodeGreaterThan(String value) {
+            addCriterion("nation_code >", value, "nationCode");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameGreaterThanOrEqualTo(String value) {
-            addCriterion("user_name >=", value, "userName");
+        public Criteria andNationCodeGreaterThanOrEqualTo(String value) {
+            addCriterion("nation_code >=", value, "nationCode");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameLessThan(String value) {
-            addCriterion("user_name <", value, "userName");
+        public Criteria andNationCodeLessThan(String value) {
+            addCriterion("nation_code <", value, "nationCode");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameLessThanOrEqualTo(String value) {
-            addCriterion("user_name <=", value, "userName");
+        public Criteria andNationCodeLessThanOrEqualTo(String value) {
+            addCriterion("nation_code <=", value, "nationCode");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameLike(String value) {
-            addCriterion("user_name like", value, "userName");
+        public Criteria andNationCodeLike(String value) {
+            addCriterion("nation_code like", value, "nationCode");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameNotLike(String value) {
-            addCriterion("user_name not like", value, "userName");
+        public Criteria andNationCodeNotLike(String value) {
+            addCriterion("nation_code not like", value, "nationCode");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameIn(List<String> values) {
-            addCriterion("user_name in", values, "userName");
+        public Criteria andNationCodeIn(List<String> values) {
+            addCriterion("nation_code in", values, "nationCode");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameNotIn(List<String> values) {
-            addCriterion("user_name not in", values, "userName");
+        public Criteria andNationCodeNotIn(List<String> values) {
+            addCriterion("nation_code not in", values, "nationCode");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameBetween(String value1, String value2) {
-            addCriterion("user_name between", value1, value2, "userName");
+        public Criteria andNationCodeBetween(String value1, String value2) {
+            addCriterion("nation_code between", value1, value2, "nationCode");
             return (Criteria) this;
         }
 
-        public Criteria andUserNameNotBetween(String value1, String value2) {
-            addCriterion("user_name not between", value1, value2, "userName");
+        public Criteria andNationCodeNotBetween(String value1, String value2) {
+            addCriterion("nation_code not between", value1, value2, "nationCode");
             return (Criteria) this;
         }
 
-        public Criteria andShowNameIsNull() {
-            addCriterion("show_name is null");
+        public Criteria andNationNameIsNull() {
+            addCriterion("nation_name is null");
             return (Criteria) this;
         }
 
-        public Criteria andShowNameIsNotNull() {
-            addCriterion("show_name is not null");
+        public Criteria andNationNameIsNotNull() {
+            addCriterion("nation_name is not null");
             return (Criteria) this;
         }
 
-        public Criteria andShowNameEqualTo(String value) {
-            addCriterion("show_name =", value, "showName");
+        public Criteria andNationNameEqualTo(String value) {
+            addCriterion("nation_name =", value, "nationName");
             return (Criteria) this;
         }
 
-        public Criteria andShowNameNotEqualTo(String value) {
-            addCriterion("show_name <>", value, "showName");
+        public Criteria andNationNameNotEqualTo(String value) {
+            addCriterion("nation_name <>", value, "nationName");
             return (Criteria) this;
         }
 
-        public Criteria andShowNameGreaterThan(String value) {
-            addCriterion("show_name >", value, "showName");
+        public Criteria andNationNameGreaterThan(String value) {
+            addCriterion("nation_name >", value, "nationName");
             return (Criteria) this;
         }
 
-        public Criteria andShowNameGreaterThanOrEqualTo(String value) {
-            addCriterion("show_name >=", value, "showName");
+        public Criteria andNationNameGreaterThanOrEqualTo(String value) {
+            addCriterion("nation_name >=", value, "nationName");
             return (Criteria) this;
         }
 
-        public Criteria andShowNameLessThan(String value) {
-            addCriterion("show_name <", value, "showName");
+        public Criteria andNationNameLessThan(String value) {
+            addCriterion("nation_name <", value, "nationName");
             return (Criteria) this;
         }
 
-        public Criteria andShowNameLessThanOrEqualTo(String value) {
-            addCriterion("show_name <=", value, "showName");
+        public Criteria andNationNameLessThanOrEqualTo(String value) {
+            addCriterion("nation_name <=", value, "nationName");
             return (Criteria) this;
         }
 
-        public Criteria andShowNameLike(String value) {
-            addCriterion("show_name like", value, "showName");
+        public Criteria andNationNameLike(String value) {
+            addCriterion("nation_name like", value, "nationName");
             return (Criteria) this;
         }
 
-        public Criteria andShowNameNotLike(String value) {
-            addCriterion("show_name not like", value, "showName");
+        public Criteria andNationNameNotLike(String value) {
+            addCriterion("nation_name not like", value, "nationName");
             return (Criteria) this;
         }
 
-        public Criteria andShowNameIn(List<String> values) {
-            addCriterion("show_name in", values, "showName");
+        public Criteria andNationNameIn(List<String> values) {
+            addCriterion("nation_name in", values, "nationName");
             return (Criteria) this;
         }
 
-        public Criteria andShowNameNotIn(List<String> values) {
-            addCriterion("show_name not in", values, "showName");
+        public Criteria andNationNameNotIn(List<String> values) {
+            addCriterion("nation_name not in", values, "nationName");
             return (Criteria) this;
         }
 
-        public Criteria andShowNameBetween(String value1, String value2) {
-            addCriterion("show_name between", value1, value2, "showName");
+        public Criteria andNationNameBetween(String value1, String value2) {
+            addCriterion("nation_name between", value1, value2, "nationName");
             return (Criteria) this;
         }
 
-        public Criteria andShowNameNotBetween(String value1, String value2) {
-            addCriterion("show_name not between", value1, value2, "showName");
+        public Criteria andNationNameNotBetween(String value1, String value2) {
+            addCriterion("nation_name not between", value1, value2, "nationName");
             return (Criteria) this;
         }
 
-        public Criteria andPasswordIsNull() {
-            addCriterion("password is null");
+        public Criteria andNationEngIsNull() {
+            addCriterion("nation_eng is null");
             return (Criteria) this;
         }
 
-        public Criteria andPasswordIsNotNull() {
-            addCriterion("password is not null");
+        public Criteria andNationEngIsNotNull() {
+            addCriterion("nation_eng is not null");
             return (Criteria) this;
         }
 
-        public Criteria andPasswordEqualTo(String value) {
-            addCriterion("password =", value, "password");
+        public Criteria andNationEngEqualTo(String value) {
+            addCriterion("nation_eng =", value, "nationEng");
             return (Criteria) this;
         }
 
-        public Criteria andPasswordNotEqualTo(String value) {
-            addCriterion("password <>", value, "password");
+        public Criteria andNationEngNotEqualTo(String value) {
+            addCriterion("nation_eng <>", value, "nationEng");
             return (Criteria) this;
         }
 
-        public Criteria andPasswordGreaterThan(String value) {
-            addCriterion("password >", value, "password");
+        public Criteria andNationEngGreaterThan(String value) {
+            addCriterion("nation_eng >", value, "nationEng");
             return (Criteria) this;
         }
 
-        public Criteria andPasswordGreaterThanOrEqualTo(String value) {
-            addCriterion("password >=", value, "password");
+        public Criteria andNationEngGreaterThanOrEqualTo(String value) {
+            addCriterion("nation_eng >=", value, "nationEng");
             return (Criteria) this;
         }
 
-        public Criteria andPasswordLessThan(String value) {
-            addCriterion("password <", value, "password");
+        public Criteria andNationEngLessThan(String value) {
+            addCriterion("nation_eng <", value, "nationEng");
             return (Criteria) this;
         }
 
-        public Criteria andPasswordLessThanOrEqualTo(String value) {
-            addCriterion("password <=", value, "password");
+        public Criteria andNationEngLessThanOrEqualTo(String value) {
+            addCriterion("nation_eng <=", value, "nationEng");
             return (Criteria) this;
         }
 
-        public Criteria andPasswordLike(String value) {
-            addCriterion("password like", value, "password");
+        public Criteria andNationEngLike(String value) {
+            addCriterion("nation_eng like", value, "nationEng");
             return (Criteria) this;
         }
 
-        public Criteria andPasswordNotLike(String value) {
-            addCriterion("password not like", value, "password");
+        public Criteria andNationEngNotLike(String value) {
+            addCriterion("nation_eng not like", value, "nationEng");
             return (Criteria) this;
         }
 
-        public Criteria andPasswordIn(List<String> values) {
-            addCriterion("password in", values, "password");
+        public Criteria andNationEngIn(List<String> values) {
+            addCriterion("nation_eng in", values, "nationEng");
             return (Criteria) this;
         }
 
-        public Criteria andPasswordNotIn(List<String> values) {
-            addCriterion("password not in", values, "password");
+        public Criteria andNationEngNotIn(List<String> values) {
+            addCriterion("nation_eng not in", values, "nationEng");
             return (Criteria) this;
         }
 
-        public Criteria andPasswordBetween(String value1, String value2) {
-            addCriterion("password between", value1, value2, "password");
+        public Criteria andNationEngBetween(String value1, String value2) {
+            addCriterion("nation_eng between", value1, value2, "nationEng");
             return (Criteria) this;
         }
 
-        public Criteria andPasswordNotBetween(String value1, String value2) {
-            addCriterion("password not between", value1, value2, "password");
+        public Criteria andNationEngNotBetween(String value1, String value2) {
+            addCriterion("nation_eng not between", value1, value2, "nationEng");
             return (Criteria) this;
         }
 
-        public Criteria andStateIsNull() {
-            addCriterion("state is null");
+        public Criteria andNationPhoneCodeIsNull() {
+            addCriterion("nation_phone_code is null");
             return (Criteria) this;
         }
 
-        public Criteria andStateIsNotNull() {
-            addCriterion("state is not null");
+        public Criteria andNationPhoneCodeIsNotNull() {
+            addCriterion("nation_phone_code is not null");
             return (Criteria) this;
         }
 
-        public Criteria andStateEqualTo(String value) {
-            addCriterion("state =", value, "state");
+        public Criteria andNationPhoneCodeEqualTo(String value) {
+            addCriterion("nation_phone_code =", value, "nationPhoneCode");
             return (Criteria) this;
         }
 
-        public Criteria andStateNotEqualTo(String value) {
-            addCriterion("state <>", value, "state");
+        public Criteria andNationPhoneCodeNotEqualTo(String value) {
+            addCriterion("nation_phone_code <>", value, "nationPhoneCode");
             return (Criteria) this;
         }
 
-        public Criteria andStateGreaterThan(String value) {
-            addCriterion("state >", value, "state");
+        public Criteria andNationPhoneCodeGreaterThan(String value) {
+            addCriterion("nation_phone_code >", value, "nationPhoneCode");
             return (Criteria) this;
         }
 
-        public Criteria andStateGreaterThanOrEqualTo(String value) {
-            addCriterion("state >=", value, "state");
+        public Criteria andNationPhoneCodeGreaterThanOrEqualTo(String value) {
+            addCriterion("nation_phone_code >=", value, "nationPhoneCode");
             return (Criteria) this;
         }
 
-        public Criteria andStateLessThan(String value) {
-            addCriterion("state <", value, "state");
+        public Criteria andNationPhoneCodeLessThan(String value) {
+            addCriterion("nation_phone_code <", value, "nationPhoneCode");
             return (Criteria) this;
         }
 
-        public Criteria andStateLessThanOrEqualTo(String value) {
-            addCriterion("state <=", value, "state");
+        public Criteria andNationPhoneCodeLessThanOrEqualTo(String value) {
+            addCriterion("nation_phone_code <=", value, "nationPhoneCode");
             return (Criteria) this;
         }
 
-        public Criteria andStateLike(String value) {
-            addCriterion("state like", value, "state");
+        public Criteria andNationPhoneCodeLike(String value) {
+            addCriterion("nation_phone_code like", value, "nationPhoneCode");
             return (Criteria) this;
         }
 
-        public Criteria andStateNotLike(String value) {
-            addCriterion("state not like", value, "state");
+        public Criteria andNationPhoneCodeNotLike(String value) {
+            addCriterion("nation_phone_code not like", value, "nationPhoneCode");
             return (Criteria) this;
         }
 
-        public Criteria andStateIn(List<String> values) {
-            addCriterion("state in", values, "state");
+        public Criteria andNationPhoneCodeIn(List<String> values) {
+            addCriterion("nation_phone_code in", values, "nationPhoneCode");
             return (Criteria) this;
         }
 
-        public Criteria andStateNotIn(List<String> values) {
-            addCriterion("state not in", values, "state");
+        public Criteria andNationPhoneCodeNotIn(List<String> values) {
+            addCriterion("nation_phone_code not in", values, "nationPhoneCode");
             return (Criteria) this;
         }
 
-        public Criteria andStateBetween(String value1, String value2) {
-            addCriterion("state between", value1, value2, "state");
+        public Criteria andNationPhoneCodeBetween(String value1, String value2) {
+            addCriterion("nation_phone_code between", value1, value2, "nationPhoneCode");
             return (Criteria) this;
         }
 
-        public Criteria andStateNotBetween(String value1, String value2) {
-            addCriterion("state not between", value1, value2, "state");
+        public Criteria andNationPhoneCodeNotBetween(String value1, String value2) {
+            addCriterion("nation_phone_code not between", value1, value2, "nationPhoneCode");
             return (Criteria) this;
         }
 
@@ -517,79 +517,129 @@ public class UserExample {
             return (Criteria) this;
         }
 
-        public Criteria andCreateOperatorIsNull() {
-            addCriterion("create_operator is null");
+        public Criteria andIsExpandIsNull() {
+            addCriterion("is_expand is null");
             return (Criteria) this;
         }
 
-        public Criteria andCreateOperatorIsNotNull() {
-            addCriterion("create_operator is not null");
+        public Criteria andIsExpandIsNotNull() {
+            addCriterion("is_expand is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCreateOperatorEqualTo(String value) {
-            addCriterion("create_operator =", value, "createOperator");
+        public Criteria andIsExpandEqualTo(Byte value) {
+            addCriterion("is_expand =", value, "isExpand");
             return (Criteria) this;
         }
 
-        public Criteria andCreateOperatorNotEqualTo(String value) {
-            addCriterion("create_operator <>", value, "createOperator");
+        public Criteria andIsExpandNotEqualTo(Byte value) {
+            addCriterion("is_expand <>", value, "isExpand");
             return (Criteria) this;
         }
 
-        public Criteria andCreateOperatorGreaterThan(String value) {
-            addCriterion("create_operator >", value, "createOperator");
+        public Criteria andIsExpandGreaterThan(Byte value) {
+            addCriterion("is_expand >", value, "isExpand");
             return (Criteria) this;
         }
 
-        public Criteria andCreateOperatorGreaterThanOrEqualTo(String value) {
-            addCriterion("create_operator >=", value, "createOperator");
+        public Criteria andIsExpandGreaterThanOrEqualTo(Byte value) {
+            addCriterion("is_expand >=", value, "isExpand");
             return (Criteria) this;
         }
 
-        public Criteria andCreateOperatorLessThan(String value) {
-            addCriterion("create_operator <", value, "createOperator");
+        public Criteria andIsExpandLessThan(Byte value) {
+            addCriterion("is_expand <", value, "isExpand");
             return (Criteria) this;
         }
 
-        public Criteria andCreateOperatorLessThanOrEqualTo(String value) {
-            addCriterion("create_operator <=", value, "createOperator");
+        public Criteria andIsExpandLessThanOrEqualTo(Byte value) {
+            addCriterion("is_expand <=", value, "isExpand");
             return (Criteria) this;
         }
 
-        public Criteria andCreateOperatorLike(String value) {
-            addCriterion("create_operator like", value, "createOperator");
+        public Criteria andIsExpandIn(List<Byte> values) {
+            addCriterion("is_expand in", values, "isExpand");
             return (Criteria) this;
         }
 
-        public Criteria andCreateOperatorNotLike(String value) {
-            addCriterion("create_operator not like", value, "createOperator");
+        public Criteria andIsExpandNotIn(List<Byte> values) {
+            addCriterion("is_expand not in", values, "isExpand");
             return (Criteria) this;
         }
 
-        public Criteria andCreateOperatorIn(List<String> values) {
-            addCriterion("create_operator in", values, "createOperator");
+        public Criteria andIsExpandBetween(Byte value1, Byte value2) {
+            addCriterion("is_expand between", value1, value2, "isExpand");
             return (Criteria) this;
         }
 
-        public Criteria andCreateOperatorNotIn(List<String> values) {
-            addCriterion("create_operator not in", values, "createOperator");
+        public Criteria andIsExpandNotBetween(Byte value1, Byte value2) {
+            addCriterion("is_expand not between", value1, value2, "isExpand");
             return (Criteria) this;
         }
 
-        public Criteria andCreateOperatorBetween(String value1, String value2) {
-            addCriterion("create_operator between", value1, value2, "createOperator");
+        public Criteria andIsDelIsNull() {
+            addCriterion("is_del is null");
             return (Criteria) this;
         }
 
-        public Criteria andCreateOperatorNotBetween(String value1, String value2) {
-            addCriterion("create_operator not between", value1, value2, "createOperator");
+        public Criteria andIsDelIsNotNull() {
+            addCriterion("is_del is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDelEqualTo(Byte value) {
+            addCriterion("is_del =", value, "isDel");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDelNotEqualTo(Byte value) {
+            addCriterion("is_del <>", value, "isDel");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDelGreaterThan(Byte value) {
+            addCriterion("is_del >", value, "isDel");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDelGreaterThanOrEqualTo(Byte value) {
+            addCriterion("is_del >=", value, "isDel");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDelLessThan(Byte value) {
+            addCriterion("is_del <", value, "isDel");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDelLessThanOrEqualTo(Byte value) {
+            addCriterion("is_del <=", value, "isDel");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDelIn(List<Byte> values) {
+            addCriterion("is_del in", values, "isDel");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDelNotIn(List<Byte> values) {
+            addCriterion("is_del not in", values, "isDel");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDelBetween(Byte value1, Byte value2) {
+            addCriterion("is_del between", value1, value2, "isDel");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsDelNotBetween(Byte value1, Byte value2) {
+            addCriterion("is_del not between", value1, value2, "isDel");
             return (Criteria) this;
         }
     }
 
     /**
-     * user
+     * nation_code
      */
     public static class Criteria extends GeneratedCriteria {
 
@@ -599,7 +649,7 @@ public class UserExample {
     }
 
     /**
-     * user 2018-04-23
+     * nation_code 2018-04-23
      */
     public static class Criterion {
         private String condition;

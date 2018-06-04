@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+	<context id="DB2Tables" targetRuntime="MyBatis3">
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
+		<commentGenerator type="mybatis.MyCommentGenerator">
+		</commentGenerator>
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://127.0.0.1:3306/guoguo" userId="zty"
+			password="zty">
+		</jdbcConnection>
+
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<javaModelGenerator targetPackage="com.guoguo.bean"
+			targetProject="D:\study\wx\p-guoguo\m-guoguo\src\main\java\">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+		<sqlMapGenerator targetPackage="com.guoguo.mapper"
+			targetProject="D:\study\wx\p-guoguo\m-guoguo\src\main\resources">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+
+		<javaClientGenerator type="XMLMAPPER" targetPackage="com.guoguo.mapper"
+			 targetProject="D:\study\wx\p-guoguo\m-guoguo\src\main\java\">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+
+		<table tableName="nation_region" enableCountByExample="true"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="true" selectByExampleQueryId="true"
+			enableInsert="true" enableUpdateByPrimaryKey="true"
+			enableDeleteByPrimaryKey="true" modelType="flat">
+			<property name="useActualColumnNames" value="false" />
+			<generatedKey column="id" sqlStatement="JDBC" identity="true" />
+			<columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />
+		</table>
+		
+	</context>
+</generatorConfiguration>

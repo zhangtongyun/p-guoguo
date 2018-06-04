@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.guoguo.mapper.SystemCodeMapper">
+  <resultMap id="BaseResultMap" type="com.guoguo.bean.SystemCode">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="code_type" jdbcType="VARCHAR" property="codeType" />
+    <result column="code_type_name" jdbcType="VARCHAR" property="codeTypeName" />
+    <result column="code_value_code" jdbcType="VARCHAR" property="codeValueCode" />
+    <result column="code_value_name" jdbcType="VARCHAR" property="codeValueName" />
+    <result column="order_num" jdbcType="INTEGER" property="orderNum" />
+    <result column="create_datetime" jdbcType="TIMESTAMP" property="createDatetime" />
+    <result column="create_operator" jdbcType="VARCHAR" property="createOperator" />
+    <result column="update_datetime" jdbcType="TIMESTAMP" property="updateDatetime" />
+    <result column="update_operator" jdbcType="VARCHAR" property="updateOperator" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, code_type, code_type_name, code_value_code, code_value_name, order_num, create_datetime, 
+    create_operator, update_datetime, update_operator, status
+  </sql>
+  <select id="selectByExample" parameterType="com.guoguo.bean.SystemCodeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from system_code
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from system_code
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from system_code
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.guoguo.bean.SystemCode" useGeneratedKeys="true">
+    insert into system_code (code_type, code_type_name, code_value_code, 
+      code_value_name, order_num, create_datetime, 
+      create_operator, update_datetime, update_operator, 
+      status)
+    values (#{codeType,jdbcType=VARCHAR}, #{codeTypeName,jdbcType=VARCHAR}, #{codeValueCode,jdbcType=VARCHAR}, 
+      #{codeValueName,jdbcType=VARCHAR}, #{orderNum,jdbcType=INTEGER}, #{createDatetime,jdbcType=TIMESTAMP}, 
+      #{createOperator,jdbcType=VARCHAR}, #{updateDatetime,jdbcType=TIMESTAMP}, #{updateOperator,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.guoguo.bean.SystemCode" useGeneratedKeys="true">
+    insert into system_code
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="codeType != null">
+        code_type,
+      </if>
+      <if test="codeTypeName != null">
+        code_type_name,
+      </if>
+      <if test="codeValueCode != null">
+        code_value_code,
+      </if>
+      <if test="codeValueName != null">
+        code_value_name,
+      </if>
+      <if test="orderNum != null">
+        order_num,
+      </if>
+      <if test="createDatetime != null">
+        create_datetime,
+      </if>
+      <if test="createOperator != null">
+        create_operator,
+      </if>
+      <if test="updateDatetime != null">
+        update_datetime,
+      </if>
+      <if test="updateOperator != null">
+        update_operator,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="codeType != null">
+        #{codeType,jdbcType=VARCHAR},
+      </if>
+      <if test="codeTypeName != null">
+        #{codeTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="codeValueCode != null">
+        #{codeValueCode,jdbcType=VARCHAR},
+      </if>
+      <if test="codeValueName != null">
+        #{codeValueName,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNum != null">
+        #{orderNum,jdbcType=INTEGER},
+      </if>
+      <if test="createDatetime != null">
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createOperator != null">
+        #{createOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDatetime != null">
+        #{updateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateOperator != null">
+        #{updateOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.guoguo.bean.SystemCodeExample" resultType="java.lang.Long">
+    select count(*) from system_code
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.guoguo.bean.SystemCode">
+    update system_code
+    <set>
+      <if test="codeType != null">
+        code_type = #{codeType,jdbcType=VARCHAR},
+      </if>
+      <if test="codeTypeName != null">
+        code_type_name = #{codeTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="codeValueCode != null">
+        code_value_code = #{codeValueCode,jdbcType=VARCHAR},
+      </if>
+      <if test="codeValueName != null">
+        code_value_name = #{codeValueName,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNum != null">
+        order_num = #{orderNum,jdbcType=INTEGER},
+      </if>
+      <if test="createDatetime != null">
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createOperator != null">
+        create_operator = #{createOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDatetime != null">
+        update_datetime = #{updateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateOperator != null">
+        update_operator = #{updateOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.guoguo.bean.SystemCode">
+    update system_code
+    set code_type = #{codeType,jdbcType=VARCHAR},
+      code_type_name = #{codeTypeName,jdbcType=VARCHAR},
+      code_value_code = #{codeValueCode,jdbcType=VARCHAR},
+      code_value_name = #{codeValueName,jdbcType=VARCHAR},
+      order_num = #{orderNum,jdbcType=INTEGER},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      create_operator = #{createOperator,jdbcType=VARCHAR},
+      update_datetime = #{updateDatetime,jdbcType=TIMESTAMP},
+      update_operator = #{updateOperator,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

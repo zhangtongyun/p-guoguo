@@ -1,11 +1,12 @@
 package com.guoguo.mapper;
 
-import java.util.List;
-
 import com.guoguo.bean.User;
 import com.guoguo.bean.UserExample;
+import java.util.List;
 
 public interface UserMapper {
+    long countByExample(UserExample example);
+
     int deleteByPrimaryKey(Integer id);
 
     int insert(User record);

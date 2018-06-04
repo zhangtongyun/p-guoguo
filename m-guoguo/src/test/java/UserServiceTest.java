@@ -21,7 +21,7 @@ public class UserServiceTest {
     public void sss(){
         User user = userService.getUser(0);
 
-        System.out.println(user.getName());
+        System.out.println(user.getUserName());
     }
 
 }
