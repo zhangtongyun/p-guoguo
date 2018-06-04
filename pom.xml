@@ -29,6 +29,20 @@
         <commons.codec.version>1.11</commons.codec.version>
     </properties>
 
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <env>dev</env>
+            </properties>
+        </profile>
+        <profile>
+            <id>prd</id>
+            <properties>
+                <env>prd</env>
+            </properties>
+        </profile>
+    </profiles>
     <build>
         <plugins>
             <!-- define the project compile level -->

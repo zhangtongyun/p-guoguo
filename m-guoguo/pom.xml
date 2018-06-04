@@ -153,6 +153,19 @@
         </dependency>
     </dependencies>
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <excludes>
+                    <exclude>**/config/</exclude>
+                </excludes>
+            </resource>
+            <resource>
+                <directory>src/main/resources/config/${env}</directory>
+                <targetPath>${project.build.outputDirectory}/</targetPath>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
