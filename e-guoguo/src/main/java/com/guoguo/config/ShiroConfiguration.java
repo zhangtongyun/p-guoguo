@@ -7,13 +7,16 @@ import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
+import org.springframework.data.redis.cache.RedisCacheManager;
 
+import javax.annotation.Resource;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -24,6 +27,9 @@ import java.util.Map;
 public class ShiroConfiguration {
 
     private static final Logger logger = LoggerFactory.getLogger(ShiroConfiguration.class);
+
+    @Resource
+    private RedisCacheManager cacheManager;
 
     /**
      * Shiro的Web过滤器Factory 命名:shiroFilter<br /> * * @param securityManager * @return
@@ -63,8 +69,7 @@ public class ShiroConfiguration {
 
     @Bean
     public EhCacheManager ehCacheManager() {
-        EhCacheManager cacheManager = new EhCacheManager();
-        return cacheManager;
+        return new EhCacheManager();
     }
 
     /**
@@ -76,8 +81,23 @@ public class ShiroConfiguration {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         securityManager.setRealm(userRealm);
         //注入缓存管理器;
-        securityManager.setCacheManager(ehCacheManager());//这个如果执行多次，也是同样的一个对象;
+        securityManager.setCacheManager(ehCacheManager());//这个如果执行多次，也是同样的一个对象;也是同样的一个对象
+        securityManager.setSessionManager(sessionManager());
+
         return securityManager;
+    }
+
+    @Bean
+    public DefaultWebSessionManager sessionManager(){
+        DefaultWebSessionManager manager = new DefaultWebSessionManager();
+        manager.setSessionDAO(sessionDao());// 设置SessionDao
+        manager.setSessionIdUrlRewritingEnabled(false);
+        return manager;
+    }
+
+    @Bean
+    public RedisSessionDao sessionDao(){
+        return new RedisSessionDao();
     }
 
     /**
