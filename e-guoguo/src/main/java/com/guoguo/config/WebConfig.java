@@ -1,12 +1,16 @@
 package com.guoguo.config;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.embedded.MultipartConfigFactory;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
+import javax.servlet.MultipartConfigElement;
 
 /**
  * Created by lenovo on 2018/2/1.
@@ -42,4 +46,14 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         registry.addInterceptor(new ErrorInterceptor()).addPathPatterns("/**");
         super.addInterceptors(registry);
     }
+
+    /**
+      * 文件上传临时路径
+      */
+      @Bean
+      MultipartConfigElement multipartConfigElement() {
+             MultipartConfigFactory factory = new MultipartConfigFactory();
+             factory.setLocation(System.getProperty("user.dir")+"/upload/tmp");
+             return factory.createMultipartConfig();
+      }
 }
