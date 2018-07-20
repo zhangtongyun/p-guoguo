@@ -35,12 +35,13 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         super.addViewControllers(registry);
     }
 
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        //创建虚拟路径
-        registry.addResourceHandler("/upload/**").addResourceLocations(file+pan+imgPath);
-        super.addResourceHandlers(registry);
-    }
+//    //本地调试使用
+//    @Override
+//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//        //创建虚拟路径
+//        registry.addResourceHandler("/upload/**").addResourceLocations(file+pan+imgPath);
+//        super.addResourceHandlers(registry);
+//    }
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new ErrorInterceptor()).addPathPatterns("/**");

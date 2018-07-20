@@ -18,7 +18,7 @@ import java.util.List;
 @Controller
 public class BaseController {
 
-    @Qualifier
+    @Autowired
     protected HttpServletRequest request;
 
     @Autowired
