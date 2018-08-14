@@ -200,4 +200,8 @@
     WHERE
         album_id = #{albumId}
   </update>
+
+  <select id="maxSort" resultType="int">
+    select case when MAX(sort) is null then 0 else MAX(sort) end from photo_album_detail where album_id = #{albumId}
+  </select>
 </mapper>

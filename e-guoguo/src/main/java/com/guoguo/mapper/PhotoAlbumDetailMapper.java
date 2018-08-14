@@ -24,4 +24,6 @@ public interface PhotoAlbumDetailMapper {
     int updateByPrimaryKey(PhotoAlbumDetail record);
 
     int deleteByAlbumId(@Param("albumId")Integer albumId);
+
+    int maxSort(@Param("albumId")Integer albumId);
 }

@@ -55,6 +55,7 @@ public class PhotoAlbumDetailServiceImpl implements PhotoAlbumDetailService {
         }
         PhotoAlbumDetail record = new PhotoAlbumDetail();
         BeanUtils.copyProperties(add,record);
+        record.setSort(photoAlbumDetailMapper.maxSort(album.getId()) + 1);
         return photoAlbumDetailMapper.insertSelective(record);
     }
 
