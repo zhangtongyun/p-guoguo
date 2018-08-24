@@ -1,6 +1,7 @@
 package com.guoguo.respVo;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * Created by lenovo on 2018/4/23.
@@ -23,6 +24,8 @@ public class ProductGoodsResp implements Serializable {
     private String standard_unit;
 
     private String pic_url;
+
+    private BigDecimal market_price;
 
     public Integer getId() {
         return id;
@@ -86,5 +89,13 @@ public class ProductGoodsResp implements Serializable {
 
     public void setPic_url(String pic_url) {
         this.pic_url = pic_url;
+    }
+
+    public BigDecimal getMarket_price() {
+        return market_price;
+    }
+
+    public void setMarket_price(BigDecimal market_price) {
+        this.market_price = market_price;
     }
 }

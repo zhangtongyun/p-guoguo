@@ -416,7 +416,8 @@
         g.color,
         g.standard,
         g.standard_unit,
-        a.pic_url
+        a.pic_url,
+        g.market_price
     FROM
         product_goods g
     LEFT JOIN photo_album a ON g.id = a.goods_id
@@ -424,6 +425,9 @@
     WHERE
         g.sale_status = 1
     AND g.is_del = 0
+    <if test="categoryId != null">
     AND category_id = #{categoryId}
+    </if>
+    GROUP BY g.id
   </select>
 </mapper>
